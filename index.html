@@ -295,6 +295,17 @@ header .background{
   background-size: cover;
 }
 
+.topLinks{
+  display: block;
+  padding: 0;
+}
+  .topLinks li{
+    display: inline-block;
+  }
+    .topLinks li:not(:first-child):before{
+      content: " • ";
+    }
+
 #scrollbutton{
   position: fixed;
   bottom: 0;
@@ -489,15 +500,14 @@ footer{
     <img src="img/logo.svg" alt="Drew Schorno">
     <p class="ft-2 deck">Design thinker, front-end coder, interactive storyteller, process manager&hellip; and maybe a&nbsp;little&nbsp;crazy.</p>
 
-    <p>
-      Get in touch –
-      <span class="social">
-        <a href="mailto:dschorno@gmail.com"><img src="img/icon_email.png"></a>
-        <!-- <a href="http://www.facebook.com/dschorno"><img src="img/icon_facebook.png"></a> -->
-        <a href="http://www.linkedin.com/pub/drew-schorno/31/27a/320"><img src="img/icon_linkedin.png"></a>
-        <a href="https://twitter.com/dschorno"><img src="img/icon_twitter.png"></a></p>
-      </span>
-    </p>
+    <ul class="topLinks">
+      <li><a href="https://reading.supply/@dschorno">Blog</a></li>
+      <li><a href="mailto:dschorno@gmail.com">Email</a></li>
+      <li><a href="https://soundcloud.com/arcove">Music</a></li>
+      <li><a href="https://soundcloud.com/nightwalkpod">Podcast</a></li>
+      <li><a href="https://twitter.com/dschorno">Twitter</a></li>
+      <li><a href="http://www.linkedin.com/pub/drew-schorno/31/27a/320">LinkedIn</a></li>
+    </ul>
   </div>
   <div id="scrollbutton" class="hidden"></div>
 </header>
