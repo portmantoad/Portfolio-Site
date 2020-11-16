@@ -5,6 +5,8 @@
 		<title>Drew Schorno Portfolio Site</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,200&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,300;1,400&display=swap" rel="stylesheet"> 
         <style>
 
 /* =====================================================================
@@ -15,9 +17,6 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 /* =====================================================================
 CUSTOM STYLES GO HERE
  ======================================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,300&family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400&display=swap');
-
 
 *, *:before, *:after {
   box-sizing: inherit;
@@ -205,7 +204,7 @@ dd{
 
 .deck{ 
   font-style: italic; 
-  font-weight: 100;
+  font-weight: 300;
 }
 
 .censored{
@@ -461,13 +460,11 @@ footer{
 <div class="wrap">
   <h2>Expertise</h2>
 
-  <p class="ft-2 deck">Expertise is a startup designed to conquer the local services space. Everything was designed from the ground up with scale in mind to try to eat Thumbtack's lunch.</p>
-
-  <p>I assembled a team of >30 freelance writers and 5 designers to create high-quality business comparison pages in the style of the Wirecutter: we created over 2500 unique pages with listings for over 50,000 businesses, and I was involved in every aspect of their creation. I created tightly optimized processes that brought the total cost down to ~$15, and each page brought in an average of 3 – 5 inbound links <em>while also building enthusiasm among business owners and laying the groundwork for a two-sided marketplace.</em></p>
-
-  <p>(To put that cost figure into perspective: the average cost to acquire a real high-quality link to your webpage is ~$350, so the cost was 1/100th of that while also helping to build positive relationships with future customers.)</p>
-
-  <p>In the span of two years we successfully grew from 200 to 10,000 daily organic visitors and from $1000 to $600,000 in SEMRush value (the approximate value of our ranking on different search terms), successfully getting on the first page for many highly competitive terms.</p>
+<p class="ft-2 deck">Expertise is a startup designed to conquer the local services space. Everything was designed from the ground up with scale in mind to try to eat Thumbtack's lunch.</p>
+<p>Our competitors were releasing low-quality automatically generated business directories, and I came up with the idea to create high-quality review pages similar to the Wirecutter. We ran a test with the page “best wedding photographers in los angeles” and achieved shockingly good results (6 of the 20 featured photographers agreed to link to the page). </p>
+<p>I assembled a fully-remote team of >30 writers and 5 offshore designers. We created over 2500 unique articles with listings for over 50,000 businesses, and I was involved in every aspect of their creation. I created tightly optimized processes for logo collection & preparation, writing, and QA that brought the total cost down to ~$15 per page, and each page brought in an average of 3 – 5 inbound links while also building enthusiasm among business owners and laying the groundwork for a two-sided marketplace.</p>
+<p>(To put that cost figure into perspective: the average cost to acquire a real high-quality link to your webpage is ~$350, so the cost was 1/100th of that while also helping to build positive relationships with future customers.)</p>
+<p>In the span of two years we successfully grew from 200 to 10,000 daily organic visitors and from $1000 to $600,000 in SEMRush value (the approximate value of our ranking on different search terms), successfully getting on the first page for many highly competitive terms.</p>
 
 
   <p><a href="https://paper.dropbox.com/doc/Drew-Schorno-Visual-Design-Examples--Ae3CGIqIzjoTN4fJMbuId6qUAg-5a2cW4EpOc14tyrOBskVr#:uid=261525973512887006445007&h2=Expertise">View More</a></p>
@@ -495,6 +492,39 @@ footer{
 
 <hr>
 
+<div class="project ganaz">
+  <img class="ganaz_cover" src="img/ganaz_cover.jpg" >
+  <img class="ganaz_1 website" src="img/ganaz_1.jpg" >
+  <img class="ganaz_2 website rellax" data-rellax-speed="1.5" src="img/ganaz_2.png" >
+</div>
+
+<div class="wrap">
+  <h2>Ganaz</h2>
+
+  <p class="ft-2 deck">Ganaz is a startup making a workforce management platform that enables farms to communicate directly with their multilingual migrant workers over SMS. I joined the team in a hybrid design and front-end development role.</p>
+  <p>Our company placed a high value on understanding users and generating empathy: we even struck an equity deal with a major farm to provide regular feedback and input. I travelled to eastern washington on my very first day to conduct user research on farms, and conducted interviews with migrant workers, field managers, and office administrators. Our users on the administrative side were not the most tech-literate people in the world: a typical user would have been in her mid 50s, familiar enough with windows and microsoft office products to get by. She uses Internet Explorer, and she probably has an iPhone but doesn’t know how to use most of the features (mostly using facebook).</p>
+  <p>On the migrant worker side, smartphone proliferation was around 60% or so, with extremely limited access to data: hence the emphasis on SMS. If they did have smartphones they were mostly legacy Android devices with limited storage space, mostly used for Facebook and WhatsApp. There was also a relatively high number of users in Mexico who spoke regional indigenous languages not available on existing translation APIs, and with low or no literacy levels. </p>
+  <p>In a mad 2 month dash I created an entire design system, React component library, and coded the fully-bilingual user interface for a functional MVP in time for a hard deadline (the start of the autumn farming season). This created some technical debt, but I managed to lay a solid foundation to continue building on in that timeframe.</p>
+  <p>In the admin interface you had to be able to: </p>
+  <ul>
+    <li>Filter and select subsets of large groups of migrant workers (one client had >50,000)</li>
+    <li>Send messages to some or all of those workers at once over SMS
+      <ul>
+        <li>Immediately or at pre-scheduled times</li>
+        <li>Translated into the worker’s preferred language: this relied on translation APIs, but the translations also needed to be editable/tweakable for multilingual users. <em>(Side note: I ran comparisons of available translation services, and as of early 2019 AWS was unusably bad, Google was middle of the road, and a startup called DeepL was incredible but with a very limited number of supported languages)</em></li>
+      </ul>
+    </li>
+    <li>Manage individual conversations with workers if they responded or reached out with HR complaints (previously the workers would have no way of contacting the administrators to report abuses)</li>
+    <li>Conduct surveys over SMS using chatbots, view the analytics in a dashboard.</li>
+  </ul>
+  <p>This is a complex paradigm of unusual features, but we received enthusiastic feedback from users based on our surveys, who saw the app as easy to use. The design intentionally borrowed heavily from familiar design patterns found in Outlook, Excel, Material Design, and texting apps like WhatsApp to create a logical interface that felt familiar. The design became a major selling point and product differentiator.</p>
+
+
+  <p><a href="https://paper.dropbox.com/doc/Drew-Schorno-Visual-Design-Examples--Ae3CGIqIzjoTN4fJMbuId6qUAg-5a2cW4EpOc14tyrOBskVr#:uid=589801330124928306622186&h2=Ganaz">View More</a></p>
+</div>
+
+<hr>
+
 <div class="project project--embed">
   <iframe class="website mobile-hide" src="http://youngunknowns.com/wallcloud/" frameborder="0" allowfullscreen ></iframe>
   <img class="mobile-show" src="img/wallcloud_1.gif" >
@@ -516,26 +546,6 @@ footer{
 
 <hr>
 
-<div class="project ganaz">
-  <img class="ganaz_cover" src="img/ganaz_cover.jpg" >
-  <img class="ganaz_1 website" src="img/ganaz_1.jpg" >
-  <img class="ganaz_2 website rellax" data-rellax-speed="1.5" src="img/ganaz_2.png" >
-</div>
-
-<div class="wrap">
-  <h2>Ganaz</h2>
-
-  <p class="ft-2 deck">Ganaz is a startup making a workforce management platform for farms that enables employers to recruit, message, and manage their multilingual migrant workforce through SMS en masse. I joined the team in a hybrid design and front-end development role.</p>
-
-  <p>I travelled to eastern washington on my very first day to conduct user research on farms, and in a mad 2 month dash I created an entire design system, React component library, and coded the fully-bilingual user interface for a functional MVP in time for a hard deadline: the start of the autumn farming season. The design borrowed heavily from familiar design patterns found in <em>Outlook</em>, <em>Excel</em>, <em>Material Design</em>, and texting apps like <em>WhatsApp</em>—which became a big selling feature for our less technically-savvy user base.</p>
-
-  <p>Over the next several months I was able to help continually add new features while managing and reducing the technical and design debt.</p>
-
-  <p><a href="https://paper.dropbox.com/doc/Drew-Schorno-Visual-Design-Examples--Ae3CGIqIzjoTN4fJMbuId6qUAg-5a2cW4EpOc14tyrOBskVr#:uid=589801330124928306622186&h2=Ganaz">View More</a></p>
-</div>
-
-<hr>
-
 <div class="project orchard">
   <img class="orchard_1 website" src="img/orchard_1.jpg">
   <img class="orchard_2 website mobile-hide" src="img/orchard_2.jpg">
@@ -545,14 +555,10 @@ footer{
 
 <div class="wrap">
   <h2>The Orchard</h2>
-
-  <p class="ft-2 deck">In my role at The Orchard I identified ways to unify the organization's design language while working with the existing legacy systems.</p>
-
-  <p>I started out making websites and marketing materials for album releases, including an album cover for rapper and pop-icon Pitbull. I streamlined the process for building these marketing microsites, and hired a couple designers to take over the day-to-day (who still ultimately answered to me) while I moved over to working on the products.</p>
-
-  <p>There, I was mostly in charge of the 3rd-party app marketplace, but I noticed the overall design of the products was extremely fractured (I counted no less than 8 different sans-serif fonts on our homepage, for example). I made it my mission to take ownership of standardizing the design, and I "reverse-engineered" a style guide and design system that matched with our existing aesthetics. I slowly convinced people to implement it piece-by-piece into the products, which culminated in a full redesign of the corporate website and marketing materials that clarified our brand positioning but retained our existing logo and “voice”.</p>
-
-  <p>Another subplot was that we formed a team of musicians to create compilation albums out of existing material, and there was a need for 30—50 album cover designs per day. I taught the whole team of ~10 people how to design album covers from scratch: creating lesson plans that taught the basics of design theory, how to use photoshop, and how to generate reusable brands/templates.</p>
+  <p class="ft-2 deck">The Orchard is a major distributor of music, film, and TV content, responsible for something like 20% of all the content on itunes, and In my role there I identified ways to unify the organization's design language while working within the existing legacy systems.</p>
+  <p>I led a small team responsible for making microsites and marketing materials for album releases, but I was also not afraid to get my hands dirty and personally designed an album cover Pitbull, a full website redesign for Ra Ra Riot, and t-shirts for Broken Social Scene.</p>
+  <p>After I was given responsibility to maintain some of our legacy products (primarily our 3rd party app store), I noticed the overall design of the products was extremely fractured: I counted no less than 8 different sans-serif fonts on our homepage, for example.  I made it my mission to take ownership of standardizing the design, and "reverse-engineered" a style guide and design system that matched with our existing brand voice. I slowly convinced people in a variety of departments to implement it piece-by-piece, which culminated in a full redesign of the corporate website and marketing materials.</p>
+  <p>We also formed a team of musicians to create compilation albums out of existing material, and there was a need for 30 – 50 album cover designs per day. I taught the whole team of ~10 people how to design album covers from scratch: creating lesson plans that taught the basics of design theory, how to use photoshop, and how to generate reusable brands/templates.</p>
 
   <p><a href="https://paper.dropbox.com/doc/Drew-Schorno-Visual-Design-Examples--Ae3CGIqIzjoTN4fJMbuId6qUAg-5a2cW4EpOc14tyrOBskVr#:uid=556048435173323402719297&h2=The-Orchard">View More</a></p>
 </div>
