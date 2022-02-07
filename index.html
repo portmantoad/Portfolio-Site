@@ -501,22 +501,17 @@ footer{
   <h2>Ganaz</h2>
 
   <p class="ft-2 deck">Ganaz is a startup making a workforce management platform that enables farms to communicate directly with their multilingual migrant workers over SMS. I joined the team in a hybrid design and front-end development role.</p>
-  <p>Our company placed a high value on understanding users and generating empathy: we even struck an equity deal with a major farm to provide regular feedback and input. I travelled to eastern washington on my very first day to conduct user research on farms, and conducted interviews with migrant workers, field managers, and office administrators. Our users on the administrative side were not the most tech-literate people in the world: a typical user would have been in her mid 50s, familiar enough with windows and microsoft office products to get by. She uses Internet Explorer, and she probably has an iPhone but doesn’t know how to use most of the features (mostly using facebook).</p>
-  <p>On the migrant worker side, smartphone proliferation was around 60% or so, with extremely limited access to data: hence the emphasis on SMS. If they did have smartphones they were mostly legacy Android devices with limited storage space, mostly used for Facebook and WhatsApp. There was also a relatively high number of users in Mexico who spoke regional indigenous languages not available on existing translation APIs, and with low or no literacy levels. </p>
-  <p>In a mad 2 month dash I created an entire design system, React component library, and coded the fully-bilingual user interface for a functional MVP in time for a hard deadline (the start of the autumn farming season). This created some technical debt, but I managed to lay a solid foundation to continue building on in that timeframe.</p>
-  <p>In the admin interface you had to be able to: </p>
-  <ul>
-    <li>Filter and select subsets of large groups of migrant workers (one client had >50,000)</li>
-    <li>Send messages to some or all of those workers at once over SMS
-      <ul>
-        <li>Immediately or at pre-scheduled times</li>
-        <li>Translated into the worker’s preferred language: this relied on translation APIs, but the translations also needed to be editable/tweakable for multilingual users. <em>(Side note: I ran comparisons of available translation services, and as of early 2019 AWS was unusably bad, Google was middle of the road, and a startup called DeepL was incredible but with a very limited number of supported languages)</em></li>
-      </ul>
-    </li>
-    <li>Manage individual conversations with workers if they responded or reached out with HR complaints (previously the workers would have no way of contacting the administrators to report abuses)</li>
-    <li>Conduct surveys over SMS using chatbots, view the analytics in a dashboard.</li>
-  </ul>
-  <p>This is a complex paradigm of unusual features, but we received enthusiastic feedback from users based on our surveys, who saw the app as easy to use. The design intentionally borrowed heavily from familiar design patterns found in Outlook, Excel, Material Design, and texting apps like WhatsApp to create a logical interface that felt familiar. The design became a major selling point and product differentiator.</p>
+  <p>Ganaz is a startup making a workforce management platform that enables farms to communicate directly with their multilingual migrant workers over SMS. I joined the team in a hybrid design and front-end development role.</p>
+  <p>We placed a high value on generating empathy for our users: we struck an equity deal with a major farm to provide regular feedback. I was brought out on my first day to conduct interviews with migrant workers, field managers, and office administrators. A typical user on the admin side would be in her mid-50s, and only barely familiar enough with Windows and Microsoft Office products to get by. She uses Internet Explorer, and she probably has an iPhone but doesn’t know how to use most of the features (mostly using Facebook). On the migrant worker side, smartphone proliferation was only around 60% or so, with extremely limited access to data: hence the emphasis on SMS.</p>
+  <p>In a 2 month sprint I created an entire design system, React component library, and coded the fully-bilingual user interface for a functional MVP in time for a hard deadline (the start of the autumn farming season). This created some technical debt, but I managed to lay a solid foundation to continue building on.</p>
+  <p>In the admin interface you had to be able to:</p>
+<ul>
+ <li>Filter and select subsets of large groups of migrant workers (one client had >50,000)</li>
+<li>Send messages to those workers over SMS: immediately or pre-scheduled, and translated into the worker’s preferred language</li>
+<li>Manage individual conversations with workers</li>
+<li>Conduct surveys over SMS using chatbots, view the analytics in a dashboard.</li>
+</ul>
+<p>This is a complex paradigm of unusual features, but we received enthusiastic feedback from users based on our surveys. The design intentionally borrowed heavily from familiar design patterns found in Outlook, Excel, Google's Material Design, and texting apps like WhatsApp to create a logical interface that felt familiar. The design became a major selling point and product differentiator.</p>
 
 
   <p><a href="https://paper.dropbox.com/doc/Drew-Schorno-Visual-Design-Examples--Ae3CGIqIzjoTN4fJMbuId6qUAg-5a2cW4EpOc14tyrOBskVr#:uid=589801330124928306622186&h2=Ganaz">View More</a></p>
@@ -554,7 +549,7 @@ footer{
 
 <div class="wrap">
   <h2>The Orchard</h2>
-  <p class="ft-2 deck">The Orchard is a major distributor of music, film, and TV content, responsible for something like 20% of all the content on itunes, and In my role there I identified ways to unify the organization's design language while working within the existing legacy systems.</p>
+  <p class="ft-2 deck">The Orchard is a major distributor of music, film, and TV content, and I acted as the primary point person coordinating the design team and prioritizing needs across the corporate marketing team, an externally facing design studio that produced marketing materials for high profile bands and film/TV releases, a large legacy suite of products, an internal app store, and several sub-brands.</p>
   <p>I led a small team responsible for making microsites and marketing materials for album releases, but I was also not afraid to get my hands dirty and personally designed an album cover Pitbull, a full website redesign for Ra Ra Riot, and t-shirts for Broken Social Scene.</p>
   <p>After I was given responsibility to maintain some of our legacy products (primarily our 3rd party app store), I noticed the overall design of the products was extremely fractured: I counted no less than 8 different sans-serif fonts on our homepage, for example.  I made it my mission to take ownership of standardizing the design, and "reverse-engineered" a style guide and design system that matched with our existing brand voice. I slowly convinced people in a variety of departments to implement it piece-by-piece, which culminated in a full redesign of the corporate website and marketing materials.</p>
   <p>We also formed a team of musicians to create compilation albums out of existing material, and there was a need for 30 – 50 album cover designs per day. I taught the whole team of ~10 people how to design album covers from scratch: creating lesson plans that taught the basics of design theory, how to use photoshop, and how to generate reusable brands/templates.</p>
