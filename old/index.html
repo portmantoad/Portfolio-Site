@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Drew Schorno Portfolio Site</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,200&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,300;1,400&display=swap" rel="stylesheet"> 
+        <style>
+
+/* =====================================================================
+Browser Normalize
+ ======================================================================= */
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block}audio,canvas,video{display:inline-block;display:inline;zoom:1}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html,button,input,select,textarea{font-family:sans-serif}body{margin:0}a:focus{outline:thin dotted}a:active,a:hover{outline:0}h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em;margin:.83em 0}h3{font-size:1.17em;margin:1em 0}h4{font-size:1em;margin:1.33em 0}h5{font-size:.83em;margin:1.67em 0}h6{font-size:.75em;margin:2.33em 0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}blockquote{margin:1em 40px}dfn{font-style:italic}mark{background:#ff0;color:#000}p,pre{margin:1em 0}code,kbd,pre,samp{font-family:monospace, serif;_font-family:'courier new', monospace;font-size:1em}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word}q{quotes:none}q:before,q:after{content:'';content:none}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}dl,menu,ol,ul{margin:1em 0}dd{margin:0 0 0 40px}menu,ol,ul{padding:0 0 0 40px}nav ul,nav ol{list-style:none;list-style-image:none}img{border:0;-ms-interpolation-mode:bicubic}svg:not(:root){overflow:hidden}figure{margin:0}form{margin:0}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0;white-space:normal;margin-left:-7px}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;vertical-align:middle}button,input{line-height:normal}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;overflow:visible}button[disabled],input[disabled]{cursor:default}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0;height:13px;width:13px}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0} ::-moz-selection { background: #b3d4fc; text-shadow: none;} ::selection { background: #b3d4fc; text-shadow: none;} hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;} img {vertical-align: middle;} fieldset {border: 0;margin: 0;padding: 0;} textarea {resize: vertical;} .chromeframe {margin: 0.2em 0;background: #ccc;color: #000;padding: 0.2em 0;}
+
+
+/* =====================================================================
+CUSTOM STYLES GO HERE
+ ======================================================================= */
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: calc( 13px * 1.618 + 0.4vw );
+  font-family: "IBM Plex Serif";
+  font-family: 'IBM Plex Serif', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+    height:100%;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  color: #0f2943;
+  background: #fdfdfd;
+}
+
+.ft-0, body, h5, h6{
+  font-size:0.618rem;
+  line-height:1rem;
+}
+.ft-0-5{
+  font-size:0.697rem;
+  line-height:1.25rem;
+}
+.ft-1, h4{
+  font-size:0.786rem;
+  line-height:1.25rem;
+}
+.ft-1-5{
+  font-size:0.887rem;
+  line-height:1.5rem;
+}
+.ft-2, h3{
+  font-size:1rem;
+  line-height:1.5rem;
+}
+.ft-2-5{
+  font-size:1.128rem;
+  line-height:1.75rem;
+}
+.ft-3, h2{
+  font-size:1.272rem;
+  line-height:2rem;
+}
+.ft-3-5{
+  font-size:1.435rem;
+  line-height:2.25rem;
+}
+.ft-4, h1{
+  font-size:1.618rem;
+  line-height:2.5rem;
+}
+.ft-4-5{
+  font-size:1.825rem;
+  line-height:3rem;
+}
+.ft-5  {
+  font-size:2.058rem;
+  line-height:3.25rem;
+}
+.ft-5-5{
+  font-size:2.321rem;
+  line-height:3.75rem;
+}
+.ft-6  {
+  font-size:2.618rem;
+  line-height:4.25rem;
+}
+.ft-6-5{
+  font-size:2.953rem;
+  line-height:4.75rem;
+}
+.ft-7  {
+  font-size:3.33rem;
+  line-height:5.5rem;
+}
+
+h1, h2, h3, h4, h5, h6{
+  word-wrap: break-word;
+  font-weight: bold;
+  margin:0 0 .5rem;
+  color: #c14d14;
+  column-span: all;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: -.045em;
+}
+
+h2{
+  font-size:2.058rem;
+  line-height:2.5rem;
+}
+
+small{
+  font-size: 78.615137745%;
+}
+
+blockquote, ul, ol, dl, form, hr, p{
+  margin:0 0 .5rem;
+}
+
+blockquote{
+  padding-left: .5rem;
+  margin-left: .5rem;
+  border-left: .25rem solid #eee;
+}
+
+ul, ol{
+  padding-left: 1rem;
+}
+
+li{
+ margin-bottom: 0.25rem;
+}
+
+address {
+  font-style: normal;
+}
+
+hr {
+  border: 0;
+  height: 6rem;
+  background-image: url("img/wave.svg");
+  background-size: auto 100%;
+  margin: 4rem 0;
+}
+
+a{
+  color: #c14d14;
+  cursor: pointer;
+  transition: color 150ms, opacity 150ms;
+}
+
+a:hover, a:visited{
+    color: #8e4623;
+    opacity: 0.8;
+}
+
+img{
+  width: 100%; 
+  height:auto;
+}
+
+dl{
+  /*margin-left:1rem;*/
+}
+
+dt{
+  display: inline;
+  white-space:pre;
+  font-size: 78.615137745%;
+  letter-spacing: .05em;
+  font-weight: bold;
+  font-style: normal;
+  padding-right:.2em;
+}
+
+dt:nth-of-type(n+2):before{
+  content:'\A';
+}
+
+dd:before{
+    content: " • ";
+}
+
+dd{
+  display: inline-block;
+  margin:0;
+  font-size: 78.615%;
+  font-style: italic;
+}
+
+.deck{ 
+  font-style: italic; 
+  font-weight: 300;
+}
+
+.censored{
+  font-family: "heydings", "blokk";
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+}
+
+header{
+  position: relative;
+  min-height: 100vh;
+  padding: 0 0 2rem;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+header .background{
+  position: absolute;
+  top:0; left:0; bottom:0; right:0;
+  z-index: -10;
+  background-image: url('img/background.jpg');
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.topLinks{
+  display: block;
+  padding: 0;
+}
+  .topLinks li{
+    display: inline-block;
+  }
+    .topLinks li:not(:first-child):before{
+      content: " • ";
+    }
+
+#scrollbutton{
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  background: #c14d14;
+  transition: all 300ms;
+  transform: translate(-50%, 0);
+  width: 3rem; 
+  height: 1.5rem;
+  z-index: 10;
+  cursor: pointer;
+}
+
+#scrollbutton.hidden{
+  transform: translate(-50%, 100%);
+  opacity: 0;
+}
+
+#scrollbutton:before{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: .4rem;
+  left: 50%;
+  border-left: .5rem solid transparent;
+  border-right: .5rem solid transparent;
+  border-top: .5rem solid #fff;
+  transform: translate(-50%, 0);
+}
+
+.wrap{
+  width: calc(38rem / 12 * 8);
+  max-width: calc(100% - 2rem);
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.social{
+  display: inline-block;
+}
+
+.social img{
+  width:1.25rem; 
+  padding:0;
+}
+
+.project{
+/*  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 2rem;
+  grid-column-gap: 1rem;*/
+  position: relative;
+  width: calc(100vw - 1.5rem);
+  max-width: 36rem;
+  padding: 0 .5rem;
+  margin: 0 auto;
+}
+
+.project:before{
+  content: ""; 
+  display: block; 
+}
+
+.project img{
+  position: absolute;
+}
+
+/* ugly safari hack to hide rellax because its broken */
+_::-webkit-full-page-media, _:future, :root .project img{ transform: translate(0) !important; } 
+
+.project--embed{
+  display: block;
+} 
+
+.project--embed iframe{
+  width:100%; 
+  height:90vh; 
+  max-height: 23rem;
+}
+
+
+.website{
+  background: #fff;
+  border:1px solid rgba(0,0,0,0.05);
+  background-clip: padding-box;
+  box-shadow: 0px .125rem 3rem rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+
+footer{
+  background: #e4e4e4;
+  padding: 2rem 0;
+  margin: 2rem 0 0;
+}
+
+.paperLink{
+  border: 5px solid #c14d14;
+  color: #c14d14;
+  background: rgba(0,0,0,0.05);
+  text-align: center;
+  padding: 2rem;
+  display: block;
+}
+
+.ganaz:before{ padding-bottom: calc(100% / 36 * 27) }
+.ganaz_cover{ left: calc(100% / 12 * 2 + 0.5rem); width: calc(100% / 12 * 10 - 1rem); top: calc(100% / 27 * 3);}
+.ganaz_1{ left: calc(100% / 12 * 0 + 0.5rem); width: calc(100% / 12 * 8 - 1rem); top: calc(100% / 27 * 6);}
+.ganaz_2{ left: calc(100% / 12 * 3 + 0.5rem); width: calc(100% / 12 * 3 - 1rem); top: calc(100% / 27 * 13);}
+
+
+.expertise:before{ padding-bottom: calc(100% / 36 * 27) }
+.expertise_logo{ left: 0.5rem; width: calc(100% / 12 * 5 - 1rem); top: calc(100% / 27 * 3);}
+.expertise_1{ left: calc(100% / 12 * 5 + 0.5rem); width: calc(100% / 12 * 6 - 1rem); top: 0;}
+.expertise_2{ left: calc(100% / 12 * 6 + 0.5rem); width: calc(100% / 12 * 6 - 1rem); top: calc(100% / 27 * 10);}
+
+.pitbull:before{ padding-bottom: calc(100% / 36 * 28.25) }
+.pitbull_1{ left: calc(100% / 12 * 1 + 0.5rem); width: calc(100% / 12 * 5 - 1rem); top: 0;}
+.pitbull_2{ left: calc(100% / 12 * 6 + 0.5rem); width: calc(100% / 12 * 5 - 1rem); top: calc(100% / 28.25 * 2);}
+.pitbull_lips{ left: calc(100% / 12 * 3 + 0.5rem); width: calc(100% / 12 * 8 - 1rem); top: calc(100% / 28.25 * 6); z-index:-10;}
+
+.orchard:before{ padding-bottom: calc(100% / 36 * 22.75) }
+.orchard_1{ left: 0.5rem; width: calc(100% / 12 * 8 - 1rem); top: 0;}
+.orchard_2{ left: calc(100% / 12 * 8 + 0.5rem); width: calc(100% / 12 * 4 - 1rem); top: calc(100% / 22.75 * 2);}
+.orchard_3{ left: calc(100% / 12 * 5 + 0.5rem); width: calc(100% / 12 * 7 - 1rem); top: calc(100% / 22.75 * 10);}
+.orchard_style1{ left: 0.5rem; width: calc(100% / 12 * 5 - 1rem); top: calc(100% / 22.75 * 16);}
+
+
+.pinepoint{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.pinepoint_1, .pinepoint_2, .pinepoint_3, .pinepoint_4, .pinepoint_5, .pinepoint_6, .pinepoint_7, .pinepoint_8, .pinepoint_9, .pinepoint_10{
+  position: relative !important;
+  margin-bottom: 1rem;
+}
+
+.pinepoint_2, .pinepoint_3, .pinepoint_4, .pinepoint_5, .pinepoint_6, .pinepoint_7, .pinepoint_8, .pinepoint_9{
+  width: calc(50% - .5rem);
+}
+
+
+.echo_1, .echo_2, .echo_3, .echo_4{
+  position: relative !important;
+}
+
+
+/*.expertise_logo{ grid-column: 1 / 6; grid-row: 2/14;}
+.expertise_1{ grid-column: 6 / 12; grid-row: 1/14;}
+.expertise_2{ grid-column: 7 / 13; grid-row: 6/14;}
+.pitbull_1{ grid-column: 2 / 7; grid-row: 1/15;}
+.pitbull_2{ grid-column: 7 / 12; grid-row: 2/15;}
+.pitbull_lips{ grid-column: 4 / 12; grid-row: 4/15; z-index:-10;}
+.orchard_1{ grid-column: 1 / 9; grid-row: 1/2;}
+.orchard_2{ grid-column: 9 / 13; grid-row: 2/12;}
+.orchard_3{ grid-column: 6 / 13; grid-row: 6/12;}
+.orchard_style1{ grid-column: 1 / 6; grid-row: 9/12}*/
+
+
+.mobile-show{
+  display: none;
+}
+
+/*@media screen and (max-width: 950px) { 
+  .project{
+    grid-template-rows: calc((100vw - 2rem) / 36 * 2);
+  }
+}*/
+
+@media screen and (max-width: 650px) { 
+
+  .project{
+    display: block;
+    max-width: 400px;
+  }
+
+  .project:before{
+    display: none;
+  }
+
+  .project img{
+    position: static;
+    width: 100%;
+    margin-bottom: 1rem;
+    transform: translate(0) !important;
+  }
+
+  .mobile-show{
+    display: inline-block;
+  }
+
+  .mobile-hide{
+    display: none;
+  }
+
+  hr{
+    display: none;
+  }
+
+
+
+}
+
+
+</style>
+</head>
+<body>
+<header>
+  <div class="background rellax" data-rellax-speed="-3"></div>
+  <div class="wrap">
+    <img src="img/logo.svg" alt="Drew Schorno">
+    <p class="ft-3 deck" style="max-width: 15em;">Designer, Writer, Front-End Coder, &amp; New Media Storyteller
+    </p>
+
+    <ul class="topLinks">
+      <li><a href="mailto:dschorno@gmail.com">Email</a></li>
+      <li><a href="https://www.linkedin.com/pub/drew-schorno/31/27a/320">LinkedIn</a></li>
+      <li><a href="https://arcove.substack.com/">Blog</a></li>
+    </ul>
+  </div>
+  <div id="scrollbutton" class="hidden"></div>
+</header>
+
+
+
+<div class="project ganaz" id="ganaz">
+  <img class="ganaz_cover" src="img/ganaz_cover.jpg" >
+  <img class="ganaz_1 website" src="img/ganaz_1.jpg" >
+  <img class="ganaz_2 website rellax" data-rellax-speed="1.5" src="img/ganaz_2.png" >
+</div>
+
+<div class="wrap">
+  <h2>Ganaz</h2>
+
+  <p class="ft-2 deck">Ganaz is a startup making a workforce management platform that enables farms to communicate directly with their multilingual migrant workers over SMS. I joined the team in a hybrid design and front-end development role.</p>
+  <p>Ganaz is a startup making a workforce management platform that enables farms to communicate directly with their multilingual migrant workers over SMS. I joined the team in a hybrid design and front-end development role.</p>
+  <p>We placed a high value on generating empathy for our users: we struck an equity deal with a major farm to provide regular feedback. I was brought out on my first day to conduct interviews with migrant workers, field managers, and office administrators. A typical user on the admin side would be in her mid-50s, and only barely familiar enough with Windows and Microsoft Office products to get by. She uses Internet Explorer, and she probably has an iPhone but doesn’t know how to use most of the features (mostly using Facebook). On the migrant worker side, smartphone proliferation was only around 60% or so, with extremely limited access to data: hence the emphasis on SMS.</p>
+  <p>In a 2 month sprint I created an entire design system, React component library, and coded the fully-bilingual user interface for a functional MVP in time for a hard deadline (the start of the autumn farming season). This created some technical debt, but I managed to lay a solid foundation to continue building on.</p>
+  <p>In the admin interface you had to be able to:</p>
+<ul>
+ <li>Filter and select subsets of large groups of migrant workers (one client had >50,000)</li>
+<li>Send messages to those workers over SMS: immediately or pre-scheduled, and translated into the worker’s preferred language</li>
+<li>Manage individual conversations with workers</li>
+<li>Conduct surveys over SMS using chatbots, view the analytics in a dashboard.</li>
+</ul>
+<p>This is a complex paradigm of unusual features, but we received enthusiastic feedback from users based on our surveys. The design intentionally borrowed heavily from familiar design patterns found in Outlook, Excel, Google's Material Design, and texting apps like WhatsApp to create a logical interface that felt familiar. The design became a major selling point and product differentiator.</p>
+
+
+  <p><a href="https://paper.dropbox.com/doc/Drew-Schorno-Visual-Design-Examples--Ae3CGIqIzjoTN4fJMbuId6qUAg-5a2cW4EpOc14tyrOBskVr#:uid=589801330124928306622186&h2=Ganaz">View More</a></p>
+</div>
+
+<hr>
+
+<div class="project pinepoint" id="pinepoint">
+  <img class="pinepoint_1" src="img/pinepoint-1.jpeg" >
+  <img class="pinepoint_2" src="img/pinepoint-2.jpeg" >
+  <img class="pinepoint_3" src="img/pinepoint-3.jpeg" >
+  <img class="pinepoint_4" src="img/pinepoint-4.jpeg" >
+  <img class="pinepoint_5" src="img/pinepoint-5.jpeg" >
+  <img class="pinepoint_6" src="img/pinepoint-6.jpeg" >
+  <img class="pinepoint_7" src="img/pinepoint-7.jpeg" >
+  <!-- <img class="pinepoint_8" src="img/pinepoint-8.png" > -->
+  <!-- <img class="pinepoint_9" src="img/pinepoint-9.jpeg" > -->
+  <img class="pinepoint_10" src="img/pinepoint-10.jpg" >
+</div>
+
+
+<div class="wrap">
+  <h2>Welcome to Pine Point</h2>
+
+  <p class="ft-2 deck">Welcome to Pine Point is an interactive project about memory, nostalgia and sense of place that takes viewers back to the now-erased-from-the-map mining community of Pine Point, Northwest Territories.</p>
+
+  <blockquote>
+    <p>"Imagine your hometown never changed. That no one ever grew old or moved on.</p>
+    <p>Part book, part film, part family photo album, 'Welcome to Pine Point' unearths a place frozen in time and discovers what happens when an entire community is erased from the map."</p>
+  </blockquote>
+
+  <p>I played an important role in the production of the project, providing design, illustration, sound editing, motion graphics, and video editing (including the production of the official trailer).</p>
+
+  <p>The project won a slew of awards including 2 Webbys (Documentary: Individual Episode & Netart), and was featured in The Paris Review, New York Times, Time Magazine, Le Monde, Variety, Ad Age, and Forbes. It has proven to have an unusual staying power for an interactive piece: it was called “tragically divine” in the New York Times as recently as 2020, a full ten years after its initial release.</p>
+</div>
+
+<hr>
+
+<div class="project expertise" id="expertise">
+  <img class="expertise_logo mobile-hide" src="img/expertise_logo.svg">
+  <img class="expertise_1 website" src="img/expertise_1.jpg" >
+  <img class="expertise_2 website rellax" data-rellax-speed="1.5" src="img/expertise_2.jpg" >
+</div>
+
+
+<div class="wrap">
+  <h2>Expertise</h2>
+
+<p class="ft-2 deck">Expertise is a startup designed to conquer the local services space. Everything was designed from the ground up with scale in mind to try to eat Thumbtack's lunch.</p>
+<p>Our competitors were releasing low-quality automatically generated business directories, and I came up with the idea to create high-quality review pages similar to the Wirecutter. We ran a test with the page “best wedding photographers in los angeles” and achieved shockingly good results (6 of the 20 featured photographers agreed to link to the page). </p>
+<p>I assembled a fully-remote team of >30 writers and 5 offshore designers. We created over 2500 unique articles with listings for over 50,000 businesses, and I was involved in every aspect of their creation. I created tightly optimized processes for logo collection & preparation, writing, and QA that brought the total cost down to ~$15 per page, and each page brought in an average of 3 – 5 inbound links while also building enthusiasm among business owners and laying the groundwork for a two-sided marketplace.</p>
+<p>(To put that cost figure into perspective: the average cost to acquire a real high-quality link to your webpage is ~$350, so the cost was 1/100th of that while also helping to build positive relationships with future customers.)</p>
+<p>In the span of two years we successfully grew from 200 to 10,000 daily organic visitors and from $1000 to $600,000 in SEMRush value (the approximate value of our ranking on different search terms), successfully getting on the first page for many highly competitive terms.</p>
+
+
+  <p><a href="https://paper.dropbox.com/doc/Drew-Schorno-Visual-Design-Examples--Ae3CGIqIzjoTN4fJMbuId6qUAg-5a2cW4EpOc14tyrOBskVr#:uid=261525973512887006445007&h2=Expertise">View More</a></p>
+</div>
+
+<hr>
+
+<div class="project pitbull" id="pitbull">
+  <img class="pitbull_1 rellax" data-rellax-speed="1.5" src="img/pitbull_1.png" />
+  <img class="pitbull_2" src="img/pitbull_2.png" />
+  <img class="pitbull_lips mobile-hide" src="img/pitbulls_lips.jpg" />
+</div>
+
+<div class="wrap">
+  <h2>Pitbull: Original Hits</h2>
+
+  <p class="ft-2 deck">I designed an album cover for rapper and pop icon Pitbull at the height of his popularity.<span style="font-style: initial;">😎</span></p> 
+
+  <p>After The Orchard bought TVT records, we owned the rights to Pitbull's music before he signed to Sony, so we decided to release a compilation album. I was given a hard drive of old Pitbull photoshoots and was told to "go nuts".<p>
+
+  <p>I talked with some people at the label more familiar with his body of work, and discovered that he is known for a signature expression: <em>slightly pursed lips</em> + <em>a knowing smirk</em>. I noticed the expression over and over again in his photos, and I was inspired to make a parody of Andy Warhol's "Marilyn Monroe's Lips" as a joke. The label manager was initially horrified, but after seeing it in context we decided to use that same close-cropped photo as the final cover. Thinking of him as a <em>icon</em> (in the Warhol sense), and allowing <em>play</em> into the process led to a fairly striking and recognizable image.</p>
+
+  <p>I also designed a custom typeface inspired by his early album covers and club flyers, and we worked with metallic inks to make the cover shine. Pitbull and his team were very satisfied with the final design.</p>
+</div>
+
+<hr>
+
+<div class="project project--embed" id="wallcloud">
+  <iframe class="website mobile-hide" src="https://youngunknowns.com/wallcloud/" frameborder="0" allowfullscreen ></iframe>
+  <img class="mobile-show" src="img/wallcloud_1.gif" >
+  <img class="mobile-show" src="img/wallcloud_2.jpg" >
+  <img class="mobile-show" src="img/wallcloud_3.gif" >
+</div>
+
+<div class="wrap">
+  <h2>Wall Cloud</h2>
+
+  <p class="ft-2 deck">Building on some ideas from Pine Point, I noticed that there might be a reusable format: a series of digital spreads set to music and meant to be read in sequence. This is an interactive music video and proof of concept project.</p>
+
+  <p>In cinema, motion and sound have proven time and time again to combine in unexpected and powerful ways. This approach combines some of that power with the benefits of giving the viewer the option to remain on a spread to contemplate or to quickly skip ahead at the pace they desire, which lends itself to a certain kinesthetic immersion. The use of text frees up the visuals and the audio to be less literal and to form their own parallel lines of thought.</p>
+
+  <p>Code created for this project was also used in the project <a href="http://89.lossur.es/">"Living Los Sures: 89 Steps"</a>.</p>
+
+  <p>"Wall Cloud" received some attention at The Orchard and I was asked to spec out what it would cost to create these projects for album releases at scale, but they balked at the budget I proposed (which included ample pay for illustrators, poets, and other creators). In retrospect I should have been more conservative.</p>
+</div>
+
+<hr>
+
+<div class="project echo" id="echo">
+  <img class="echo_1" src="img/echo-1.jpg" >
+  <img class="echo_2" src="img/echo-2.png" >
+  <img class="echo_3" src="img/echo-3.jpg" >
+  <img class="echo_4" src="img/echo-4.jpg" >
+</div>
+
+
+<div class="wrap">
+  <h2>e c h o</h2>
+
+  <p class="ft-2 deck">I led a multi-disciplinary team of designers, technologists, and filmmakers to victory at a competitive hackathon and was invited to present the project at the 2014 Tribeca Film festival. The goal of the hackathon was to explore new forms of storytelling with mobile and wearable technology.</p>
+
+ <p>Our team was comprised of Deniz Tortum (filmmaker/story concept creator), Pamela Mendoza (UI designer), Stephen Thomas, Femi King, and Raphael Vasquez (developers), and myself. I took on the role of facilitating the creative brainstorming sessions, leading the direction of the project and story, delegating tasks, and presenting the project both in front of a panel of judges and (after beating 5 other teams) at the Tribeca Film Festival.</p>
+
+ <p>The concept of our project, e c h o, was an augmented reality gallery show based around the idea of invisible artwork existing on an alternate plane, and the potential for wearable technology to extend our senses. As the viewer wanders around the gallery space, their smartwatch vibrates as they get closer and closer to a hidden artwork, and they run their smartphone along the flat surface of a seemingly blank wall to uncover the imagery and audio hidden there. We created artwork for the retrospective of an artist that never existed—Kaylie Evans, which is also the name of a girl that I made up in high school, snuck into the high school yearbook, and organized a large group of students to vote "most memorable".</p>
+</div>
+
+<hr>
+
+<div class="project orchard" id="orchard">
+  <img class="orchard_1 website" src="img/orchard_1.jpg">
+  <img class="orchard_2 website mobile-hide" src="img/orchard_2.jpg">
+  <img class="orchard_3 website rellax" data-rellax-speed="1.5" src="img/orchard_3.jpg">
+  <img class="orchard_style1" src="img/orchard_style1.png" >
+</div>
+
+<div class="wrap">
+  <h2>The Orchard</h2>
+  <p class="ft-2 deck">The Orchard is a major distributor of music, film, and TV content, and I acted as the primary point person coordinating the design team and prioritizing needs across the corporate marketing team, an externally facing design studio that produced marketing materials for high profile bands and film/TV releases, a large legacy suite of products, an internal app store, and several sub-brands.</p>
+  <p>I led a small team responsible for making microsites and marketing materials for album releases, but I was also not afraid to get my hands dirty and personally designed an album cover Pitbull, a full website redesign for Ra Ra Riot, and t-shirts for Broken Social Scene.</p>
+  <p>After I was given responsibility to maintain some of our legacy products (primarily our 3rd party app store), I noticed the overall design of the products was extremely fractured: I counted no less than 8 different sans-serif fonts on our homepage, for example.  I made it my mission to take ownership of standardizing the design, and "reverse-engineered" a style guide and design system that matched with our existing brand voice. I slowly convinced people in a variety of departments to implement it piece-by-piece, which culminated in a full redesign of the corporate website and marketing materials.</p>
+  <p>We also formed a team of musicians to create compilation albums out of existing material, and there was a need for 30 – 50 album cover designs per day. I taught the whole team of ~10 people how to design album covers from scratch: creating lesson plans that taught the basics of design theory, how to use photoshop, and how to generate reusable brands/templates.</p>
+
+  <p><a href="https://paper.dropbox.com/doc/Drew-Schorno-Visual-Design-Examples--Ae3CGIqIzjoTN4fJMbuId6qUAg-5a2cW4EpOc14tyrOBskVr#:uid=556048435173323402719297&h2=The-Orchard">View More</a></p>
+</div>
+
+<hr>
+
+<div class="project project--embed" id="localore">
+  <!-- <iframe class="website mobile-hide" src="https://localore.net/" frameborder="0"></iframe> -->
+  <img style="position:relative; margin-bottom:1rem;" src="img/localore_1.gif">
+  <img style="position:relative; margin-bottom:1rem;" src="img/localore_2.gif">
+  <img style="position:relative; margin-bottom:1rem;" src="img/localore_3.gif">
+</div>
+
+<div class="wrap">
+  <h2>Localore</h2>
+  <p class="ft-2 deck">Air Mediaworks is a funding source for local public TV and Radio Stations to make interactive stories. I created a site to showcase the year's funded projects and lead in the potential visitors.</p>
+
+  <p>The overall idea of the map comes from one of their bold claims: the idea that when these projects all come together they can represent the American experience. I carved block prints of different sections of the US map, which then move independently on the site.</p>
+
+  <p><a href="https://localore.net/">Visit the site here</a></p>
+</div>
+
+
+<hr>
+
+<a href="https://paper.dropbox.com/doc/Drew-Schorno-Visual-Design-Examples--Ae3CGIqIzjoTN4fJMbuId6qUAQ-5a2cW4EpOc14tyrOBskVr" class="wrap paperLink ft-2 deck">
+  Want to see more visual and interface design samples? Click here!
+</a>
+
+<hr>
+
+<footer>
+  
+  <div class="wrap">
+    <img src="img/about2.jpg" style="margin-bottom: 1rem">
+    <h2>About me</h2>
+  
+   <!--  <p class="ft-2 deck">I’m passionate about creating and executing thoughtful, user&#8209;centered design systems that include standards, processes, templates, and tools that help designers with varying levels of skill produce better work.</p>
+
+    <p>I’m very comfortable dealing with ambiguity, organizing design priorities, and contributing wherever I’m most needed. I strive to guide and inspire other designers to solve complex business problems and grow their abilities.</p> -->
+
+    <p>I grew up in Comox, Vancouver Island, BC, Canada; but I was born in Kirkland, Washington – <em>the Kirkland Signature brand always denotes quality at an affordable price</em>. I've split the last decade between Vancouver (where I went to school and worked on interactive documentary projects), NYC (where I worked in the music industry as a designer), and Seattle (where I worked in startups).</p>
+
+    <p>I recently graduated from <a href="https://arcove.substack.com/p/the-game-of-you">clown school</a> and the Canadian government almost paid me to make an interactive memoir about it. I sometimes consult on (and work as a creative technologist for) AR and other New Media projects.</p>
+
+    <p>I reliably cry whenever I think too hard about the painting <a href="https://www.moma.org/collection/works/78455">Christina's World</a>. My roommates used to bully me and tape printouts of it on the fridge and stuff.</p>
+
+    <p>I'm very cool and not neurotic.</p>
+        
+    <br>
+
+    <p>
+      Get in touch –
+      <span class="social">
+        <a href="mailto:dschorno@gmail.com"><img src="img/icon_email.png"></a>
+        <!-- <a href="http://www.facebook.com/dschorno"><img src="img/icon_facebook.png"></a> -->
+        <a href="http://www.linkedin.com/pub/drew-schorno/31/27a/320"><img src="img/icon_linkedin.png"></a>
+        <a href="https://twitter.com/dschorno"><img src="img/icon_twitter.png"></a></p>
+      </span>
+    </p>
+
+  </div>
+
+</footer>
+
+
+<script src="js/rellax.min.js"></script>
+<script src="js/scrollTo.js"></script>
+<script src="js/prefixfree.min.js"></script>
+<script>
+  var rellax = new Rellax('.rellax', {
+    center: true
+  });
+
+  var scrollbutton = document.getElementById('scrollbutton');
+  var header = document.querySelector("header .wrap");
+
+  var hideScrollButton = function(){
+    if (window.innerHeight < header.offsetHeight){
+      scrollbutton.classList.add('hidden');
+    } else if (window.scrollY == 0) {
+      scrollbutton.classList.remove('hidden');
+    } else {
+      scrollbutton.classList.add('hidden');
+    }
+  }
+
+  hideScrollButton(); 
+
+  setTimeout(function(){ hideScrollButton(); }, 200);
+
+  window.addEventListener('resize', function() {
+    hideScrollButton();
+  }, true);
+
+  window.addEventListener('scroll', function() {
+    hideScrollButton();
+  });
+
+  scrollbutton.addEventListener('click', function() {
+     scrollTo(window.innerHeight);   
+  })
+
+
+
+
+</script>
+
+
+		<!-- Google Analytics: change UA-22316170-1 to be your site's ID. -->
+		<script>
+			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+			function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+			e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+			e.src='//www.google-analytics.com/analytics.js';
+			r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+			ga('create','UA-22316170-1');ga('send','pageview');
+		</script>
+	</body>
+</html>
