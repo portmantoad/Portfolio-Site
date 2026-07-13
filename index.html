@@ -130,7 +130,7 @@
 93.75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK8qNHv//AP///4BAQJ11IgAAAA5UGgAAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABESURBVCjPY2AgDjCiCzARFGBGFxARQOEKKbs4KwngU4HFDBzWsqK7lBVdHYZAcACqfKiJaSheFcQYiiFAAmCjQC/NAADJ6APJy9tdKAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0yOVQxNjo1OTo0OSswMDowMEOaOnwAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMjlUMTY6NTk6NDErMDA6MDABKMynAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA5LTI5VDE3OjAwOjUyKzAwOjAw+6updgAAAABJRU5ErkJggg==), auto;}
 }
 body { animation: sparklecursor 800ms step-end infinite; }
-p:hover{ animation: starcursor 800ms step-end infinite;  }
+a:hover{ animation: starcursor 800ms step-end infinite;  }
 
 .intro__logo{position:relative;grid-column: 2 / 8;align-self: center;z-index: 10;pointer-events: none;}
   .intro__logo__1{width:100%;display:block;mix-blend-mode: screen;filter: brightness(0.4) sepia(1) saturate(10) hue-rotate(-40deg) blur(0px) contrast(1.5) }
@@ -156,6 +156,9 @@ p:hover{ animation: starcursor 800ms step-end infinite;  }
   .essays__piss__img {position: absolute;width: 100%;transform: translateY(-20%);}
 .essays__treerain {grid-column: 1 / 9;    width: 100%;}
 .essays__star {position: relative;grid-column: 11 / 14;mix-blend-mode: screen;top:15rem}
+.essays__roosterking {grid-column: 3 / 11; display: block; position: relative;}
+  .essays__roosterking__img{position: relative;}
+  .essays__roosterking__link{position: absolute; top:0; left:0; font-size:1.5rem; text-decoration: underline; color: #fff}
 .essays__list {grid-column: 2 / 8;color: #fff;margin: 2rem 0;position: relative;z-index: 10;}
   .essays__list__title {font-size: 2rem;}
 
@@ -253,6 +256,7 @@ p:hover{ animation: starcursor 800ms step-end infinite;  }
     .essays__piss__img {}
   .essays__treerain {grid-column: 1 / 13;}
   .essays__star {top:5rem}
+  .essays__roosterking {grid-column: 2 / 14;}
   .essays__list {grid-column: 2 / 14;}
     .essays__list__title {}
 
@@ -651,7 +655,13 @@ p:hover{ animation: starcursor 800ms step-end infinite;  }
 
   <img class="essays__star" src="img/essays__star.jpg">
 
+  <a href="https://roosterking.drewschorno.com" class="essays__roosterking">
+      <img class="essays__roosterking__img" src="img/roosterking.webp">
+      <p class="essays__roosterking__link">Click here to see my award winning multimedia memoir masterpiece "Rooster King"</p>
+    </a>
+
   <div class="essays__list">
+
     <h3 class="essays__list__title">My Essays</h3>
     <p>/////////////////////////////</p>
     <p><a href="https://arcove.substack.com/p/iron-lotus">iron lotus:</a> cats in jars as a metaphor for something to do with childhoods or whatever</p>
