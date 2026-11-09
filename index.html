@@ -152,9 +152,13 @@
       .essays__piss { position: relative; mix-blend-mode: screen; z-index: 4; }
         .essays__piss__img { position: absolute; transform: translateY(-20%); }
       .essays__star { position: relative; mix-blend-mode: screen; top: 15rem; }
-      .essays__roosterking { display: block; position: relative; width: 100%; }
+      /* the link's text lies over the picture in one grid cell, so on a
+         narrow phone, where the text is taller than the picture, the box
+         grows instead of the text running into the essays below */
+      .essays__roosterking { display: grid; position: relative; width: 100%; }
+        .essays__roosterking > * { grid-area: 1 / 1; }
         .essays__roosterking__img { position: relative; }
-        .essays__roosterking__link { position: absolute; top: 0; left: 0; font-size: 1.5rem; text-decoration: underline; color: #fff; }
+        .essays__roosterking__link { position: relative; align-self: start; margin-bottom: 0; font-size: 1.5rem; text-decoration: underline; color: #fff; }
       .essays__list { z-index: 10; }
         .essays__list__box { color: #fff; margin: 2rem 0; width: 100%; }
         .essays__list__title { font-size: 2rem; }
