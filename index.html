@@ -1,743 +1,394 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta property="og:title" content="drew's web site"/>
-<meta property="og:image" content="img/social.jpg"/>
-<meta property="og:description" content="Drew Schorno's personal homepage on the internet"/>
-<meta property="og:url" content="drewschorno.com"/>
-<meta property="og:image:width" content="2230" />
-<meta property="og:image:height" content="1168" />
-<meta property="og:type" content="website"/>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>drew's web site</title>
-  <style type="text/css">
+<!doctype html>
+<html lang="en" data-pt-widths="phone:751">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>drew's web site</title>
+    <meta property="og:title" content="drew's web site"/>
+    <meta property="og:image" content="img/social.jpg"/>
+    <meta property="og:description" content="Drew Schorno's personal homepage on the internet"/>
+    <meta property="og:url" content="drewschorno.com"/>
+    <meta property="og:image:width" content="2230" />
+    <meta property="og:image:height" content="1168" />
+    <meta property="og:type" content="website"/>
+    <link rel="stylesheet" href="portamento/portamento.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap" />
+    <style>
+      /*
+       * This page, from before portamento: one hand-written
+       * 14-column grid per section and twenty scroll animations. Here each
+       * section is a <pt-group> (its timeline, --pt-group, is the original's
+       * --section) holding one <pt-row flow> as the grid, each grid item is a
+       * <pt-layer> with its columns, and each animation is attributes on the
+       * layer, or on a <pt-anim> for a piece inside one. The phone layout
+       * (750px and below) is width maps on the columns; the media query keeps
+       * the rest. Layers carry what a grid item did (alignment, z-index,
+       * blending, motion); a box inside carries sizes and margins.
+       */
 
-    @import url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap');
+      /* page basics, from the original */
+      body, html {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        --line-height: 1.5;
+        line-height: var(--line-height);
+        overflow-x: hidden;
+      }
+      html {
+        box-sizing: border-box !important;
+        font-size: max(calc(13px * var(--line-height)), calc((9px + .5vw) * var(--line-height)));
+      }
+      *, *::before, *::after { box-sizing: inherit; }
+      body {
+        font-size: calc(1rem / var(--line-height));
+        font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+        background: #222;
+      }
+      .monospace {
+        font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+      }
+      h1, h2, h3, h4, h5, h6, .handwriting {
+        font-family: 'Monsieur La Doulaise', cursive;
+        line-height: 1.1;
+        font-weight: normal;
+        word-spacing: .5em;
+      }
+      p {
+        margin-block-start: calc(var(--line-height) * 1em);
+        margin-block-end: calc(var(--line-height) * 1em);
+      }
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
 
-    body,html{ 
-      padding:0; 
-      margin:0; 
-      height: 100%;
-      --line-height: 1.5;
-      line-height: var(--line-height);
-      overflow-x: hidden;
-    }
-
-    html {
-      box-sizing: border-box !important;
-      font-size: max(calc(13px * var(--line-height)), calc((9px + .5vw) * var(--line-height)));
+/* the animated cursors, from the original */
+      @keyframes starcursor {
+        0%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABRUExURQAAAFI5AK17UtacUv+9UntaUv+9AK2cUta9rdberf/erf/eUv+cUtbeUta9Uv//ra17AHt7Uv//UlJaUq1aUq29Uns5AFIYANacAHtaAAAAANUX/cUAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAABqSURBVBjTrY5ZDoAgEENZCqKgKK7c/6KiBFA+jc0kk2nypiXkP1FaGYxXBlARgHgTkJlplGo7DQNw1Q+Xw6GthUQQj1kjogo1aafDsJJhww9n52wsN+HWRyts1MCle8cRu6RuwsftGfmkE5vWAvC+npioAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjQwOjE3KzAwOjAwZt67TwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo0MDowMSswMDowMLj5NlcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTY6NDI6NDErMDA6MDBvU8lPAAAAAElFTkSuQmCC), auto; }
+        16.66666666%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAACZUExURQAAAGtSEM6cc/e9c//ne4RzMf/3jLWUhOe9lP//lP//Qv/elM7Ge//n1v/35///7///5///nP/nnP/OhP/v1v//e/fec0pCIf//9///Sv/vhP/Ge0pjIee1Mf//Of/WjMbGlN61jIRrKYSMhM6Ee///hM7ne//Wa6VjKXtjKf//a2MpCO+9GMaca5RzY4xrWoxrCLWMWgAAACysrz4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAACDSURBVBjTY2CgHmBkRBNgYkYTYGFB5bOysbGjCHBwcnHD2Dy8fPwCgoJCgpzCIqJiQAFxYTZBfglBSUFONilpGbAaWUFOQSDglJOH6VKACCjCjVQS4OTk5hRQhguoSEmxsUmpqsEF1FlYNDSlWbRgfG11HRClq64HFdA3gNAGhuQFDADVzAdsEq18KAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0yOVQxNjo0MDoxNyswMDowMGbeu08AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMjlUMTY6NDA6MDErMDA6MDC4+TZXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA5LTI5VDE2OjQyOjQxKzAwOjAwb1PJTwAAAABJRU5ErkJggg==), auto; }
+        33.33333333%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAB1UExURQAAANathP/OhP//lK2UUv//rda1rf/vxv//zv//c///vdbOhP//7///////3v//5///1v//tf//hPfec//nnP//nP/WjP/nY//vpc61c73Gvf/Gvfe1e4RKKf/vUoRSUntzUvfGnP/3jKWEe62MKc6ccwAAAAZBgbIAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAAB4SURBVBjTtdDNDsIgDABgJsNBbQe4oc796vD9X1EJg2QeTeyl7Ze2hzL2xygOX8D5vi+FOO6gkgpSfUIiqrU2YPHcBGmt/JBDA+4SZ64mDGGtbmlrgyqf7AgJke4ZehOPZhAAQwfWpX7k08zY8niuG6w+Zv/67Q9v8PYFqsXOdtwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NDA6MTcrMDA6MDBm3rtPAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjQwOjAxKzAwOjAwuPk2VwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNjo0Mjo0MSswMDowMG9TyU8AAAAASUVORK5CYII=), auto; }
+        50%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABpUExURQAAAJR7Of/erf//rXt7e///zoSEhO/WlP//9//376Wlpf//xufelP//pf//lP//3v//1v//tZSEQv/3e///797GhN7n3v/Gvf//vfe1e861e4RKKf/vSvfGnK2MhJx7c62MKc6ccwAAAK7bR0IAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAABxSURBVBjTrZBZDoAgDAVFrNYFcBd3vf8lFQVcPo1NmjLTJi/Bcf4rQl7CpU/2ALw7+wFi6N84Qowx0ibBqxhXhoJ6i73TLD9uCr2nqYkotbFB1cm1TWnEflMKaQWT0HYgmeGeD2qMfNJiXs65rN8+ZgN+0wSxStUu8QAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0yOVQxNjo0MDoxNyswMDowMGbeu08AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMjlUMTY6NDA6MDErMDA6MDC4+TZXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA5LTI5VDE2OjQyOjQxKzAwOjAwb1PJTwAAAABJRU5ErkJggg==), auto; }
+        66.66666666%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAB1UExURQAAANathP/OhP//lK2UUv//rda1rf/vxv//zv//c///vdbOhP//7///////3v//5///1v//tf//hPfec//nnP//nP/WjP/nY//vpc61c73Gvf/Gvfe1e4RKKf/vUoRSUntzUvfGnP/3jKWEe62MKc6ccwAAAAZBgbIAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAAB4SURBVBjTtdDNDsIgDABgJsNBbQe4oc796vD9X1EJg2QeTeyl7Ze2hzL2xygOX8D5vi+FOO6gkgpSfUIiqrU2YPHcBGmt/JBDA+4SZ64mDGGtbmlrgyqf7AgJke4ZehOPZhAAQwfWpX7k08zY8niuG6w+Zv/67Q9v8PYFqsXOdtwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NDA6MTcrMDA6MDBm3rtPAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjQwOjAxKzAwOjAwuPk2VwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNjo0Mjo0MSswMDowMG9TyU8AAAAASUVORK5CYII=), auto; }
+        83.33333333%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAACNUExURQAAAM6cc/e9c//ne4RzMf/3jLWUhOe9lP//lP//Qv/elM7Ge//n1v/35///7///5///nP/nnP/OhP/v1v//e/fec///9///Sv/vhP/Ge+e1Mf//Of/WjMbGlN61jIRrKYSMhM6Ee///hM7ne//Wa6VjKXtjKf//a++9GMaca5RzY4xrWoxrCLWMWgAAACyJ9LEAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAAB7SURBVBjTY2CgIWBkQhNgZkbls7CysqEIsHNwcsHY3Dy8fPwCAoICHELCIqIgESFWAT4xAXEBDlYJSYgaKQEOASDgkJaB6ZKFCMjBjZTn5+Dg4uBXgAsoSkiwskooKcMFVJiZVdUkmdURAhogUlNFC8rX1oHQOrrkhQMAVH0GdjF5pcMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NDA6MTcrMDA6MDBm3rtPAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjQwOjAxKzAwOjAwuPk2VwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNjo0Mjo0MSswMDowMG9TyU8AAAAASUVORK5CYII=), auto; }
+      }
       
-    }
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
-
-    body{
-      font-size: calc(1rem / var(--line-height));
-      font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro","Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-    }
-
-    .monospace{
-      font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro","Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-    }
-
-    h1,h2,h3,h4,h5,h6,.handwriting{
-      font-family: 'Monsieur La Doulaise', cursive;
-      line-height: 1.1;
-      font-weight: normal;
-      word-spacing: .5em;
-    }
-
-    p{
-      margin-block-start: calc(var(--line-height) * 1em);
-      margin-block-end: calc(var(--line-height) * 1em);
-    }
-
-    img{
-      width: 100%;
-      height: auto;
-      justify-self: stretch;
-      display: block;
-    }
-
-.gridlayout{
-  display: grid;
-  grid-template-columns: calc((100vw - 50rem) / 2) repeat(12, 1fr) calc((100vw - 50rem) / 2); 
-  gap: 0px min(2rem, 7vw); 
-}
-
-.autolayout{
-  --left: 1fr;
-  --right: 1fr;
-  --top: 1fr;
-  --bottom: 1fr;
-  display: grid;
-  grid-template-columns: var(--left) minmax(0,auto) var(--right); 
-  grid-template-rows: var(--top) minmax(0,auto) var(--bottom);
-  gap:0;
-}
-
-  .autolayout > *{
-    grid-column: 2 / span 1; 
-    grid-row: 2 / span 1;
-    margin:0;
-  }
-
-   section{
-      view-timeline-name: --section;
-      position: relative;
-      max-width: 60rem;
-      margin: 0 auto;
-    }
-
-
-  </style>
-</head>
-<body>
-<style type="text/css">
-  body{
-    background: #222;
-  }
-
-
-
-@keyframes starcursor {
-  0%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABRUExURQAAAFI5AK17UtacUv+9UntaUv+9AK2cUta9rdberf/erf/eUv+cUtbeUta9Uv//ra17AHt7Uv//UlJaUq1aUq29Uns5AFIYANacAHtaAAAAANUX/cUAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAABqSURBVBjTrY5ZDoAgEENZCqKgKK7c/6KiBFA+jc0kk2nypiXkP1FaGYxXBlARgHgTkJlplGo7DQNw1Q+Xw6GthUQQj1kjogo1aafDsJJhww9n52wsN+HWRyts1MCle8cRu6RuwsftGfmkE5vWAvC+npioAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjQwOjE3KzAwOjAwZt67TwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo0MDowMSswMDowMLj5NlcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTY6NDI6NDErMDA6MDBvU8lPAAAAAElFTkSuQmCC), auto; }
-  16.66666666%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAACZUExURQAAAGtSEM6cc/e9c//ne4RzMf/3jLWUhOe9lP//lP//Qv/elM7Ge//n1v/35///7///5///nP/nnP/OhP/v1v//e/fec0pCIf//9///Sv/vhP/Ge0pjIee1Mf//Of/WjMbGlN61jIRrKYSMhM6Ee///hM7ne//Wa6VjKXtjKf//a2MpCO+9GMaca5RzY4xrWoxrCLWMWgAAACysrz4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAACDSURBVBjTY2CgHmBkRBNgYkYTYGFB5bOysbGjCHBwcnHD2Dy8fPwCgoJCgpzCIqJiQAFxYTZBfglBSUFONilpGbAaWUFOQSDglJOH6VKACCjCjVQS4OTk5hRQhguoSEmxsUmpqsEF1FlYNDSlWbRgfG11HRClq64HFdA3gNAGhuQFDADVzAdsEq18KAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0yOVQxNjo0MDoxNyswMDowMGbeu08AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMjlUMTY6NDA6MDErMDA6MDC4+TZXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA5LTI5VDE2OjQyOjQxKzAwOjAwb1PJTwAAAABJRU5ErkJggg==), auto; }
-  33.33333333%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAB1UExURQAAANathP/OhP//lK2UUv//rda1rf/vxv//zv//c///vdbOhP//7///////3v//5///1v//tf//hPfec//nnP//nP/WjP/nY//vpc61c73Gvf/Gvfe1e4RKKf/vUoRSUntzUvfGnP/3jKWEe62MKc6ccwAAAAZBgbIAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAAB4SURBVBjTtdDNDsIgDABgJsNBbQe4oc796vD9X1EJg2QeTeyl7Ze2hzL2xygOX8D5vi+FOO6gkgpSfUIiqrU2YPHcBGmt/JBDA+4SZ64mDGGtbmlrgyqf7AgJke4ZehOPZhAAQwfWpX7k08zY8niuG6w+Zv/67Q9v8PYFqsXOdtwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NDA6MTcrMDA6MDBm3rtPAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjQwOjAxKzAwOjAwuPk2VwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNjo0Mjo0MSswMDowMG9TyU8AAAAASUVORK5CYII=), auto; }
-  50%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABpUExURQAAAJR7Of/erf//rXt7e///zoSEhO/WlP//9//376Wlpf//xufelP//pf//lP//3v//1v//tZSEQv/3e///797GhN7n3v/Gvf//vfe1e861e4RKKf/vSvfGnK2MhJx7c62MKc6ccwAAAK7bR0IAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAABxSURBVBjTrZBZDoAgDAVFrNYFcBd3vf8lFQVcPo1NmjLTJi/Bcf4rQl7CpU/2ALw7+wFi6N84Qowx0ibBqxhXhoJ6i73TLD9uCr2nqYkotbFB1cm1TWnEflMKaQWT0HYgmeGeD2qMfNJiXs65rN8+ZgN+0wSxStUu8QAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0yOVQxNjo0MDoxNyswMDowMGbeu08AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMjlUMTY6NDA6MDErMDA6MDC4+TZXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA5LTI5VDE2OjQyOjQxKzAwOjAwb1PJTwAAAABJRU5ErkJggg==), auto; }
-  66.66666666%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAB1UExURQAAANathP/OhP//lK2UUv//rda1rf/vxv//zv//c///vdbOhP//7///////3v//5///1v//tf//hPfec//nnP//nP/WjP/nY//vpc61c73Gvf/Gvfe1e4RKKf/vUoRSUntzUvfGnP/3jKWEe62MKc6ccwAAAAZBgbIAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAAB4SURBVBjTtdDNDsIgDABgJsNBbQe4oc796vD9X1EJg2QeTeyl7Ze2hzL2xygOX8D5vi+FOO6gkgpSfUIiqrU2YPHcBGmt/JBDA+4SZ64mDGGtbmlrgyqf7AgJke4ZehOPZhAAQwfWpX7k08zY8niuG6w+Zv/67Q9v8PYFqsXOdtwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NDA6MTcrMDA6MDBm3rtPAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjQwOjAxKzAwOjAwuPk2VwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNjo0Mjo0MSswMDowMG9TyU8AAAAASUVORK5CYII=), auto; }
-  83.33333333%{ cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAMAAAB44J7gAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAACNUExURQAAAM6cc/e9c//ne4RzMf/3jLWUhOe9lP//lP//Qv/elM7Ge//n1v/35///7///5///nP/nnP/OhP/v1v//e/fec///9///Sv/vhP/Ge+e1Mf//Of/WjMbGlN61jIRrKYSMhM6Ee///hM7ne//Wa6VjKXtjKf//a++9GMaca5RzY4xrWoxrCLWMWgAAACyJ9LEAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHRAqKVkJm50AAAB7SURBVBjTY2CgIWBkQhNgZkbls7CysqEIsHNwcsHY3Dy8fPwCAoICHELCIqIgESFWAT4xAXEBDlYJSYgaKQEOASDgkJaB6ZKFCMjBjZTn5+Dg4uBXgAsoSkiwskooKcMFVJiZVdUkmdURAhogUlNFC8rX1oHQOrrkhQMAVH0GdjF5pcMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NDA6MTcrMDA6MDBm3rtPAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjQwOjAxKzAwOjAwuPk2VwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNjo0Mjo0MSswMDowMG9TyU8AAAAASUVORK5CYII=), auto; }
-}
-
-@keyframes sparklecursor{
-0%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAVUExURQAAAJ+IK8qNHv//AP///4BAQAAAAOCSvx4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABESURBVCjPY2AgEzCiCzARFBAWQDVBycRIEa8KnIayoruDFV0dhgAzukBIAAo3NNjFOTQAnwosZhC2FkMAN2AhXin9AAAgPQQ/+mISGQAAABR0RVh0Y29tbWVudABGdSBIdW5nLW1pbmce2WAPAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
-6.25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK8qNHv//AP///4BAQOjeJgAAAN0uv6IAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABISURBVCjPY2CgFmBEF2BCF2BG4wuZGAngVwE1gxXdFlZ0dQQFWJnRRUICUORDg12cQ0PxqMBmBunuQAiwocukJKAJYKgYAAAAGx8EzWfNr3EAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
-12.5%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAbUExURQAAAJ+IK8qNHv///4BAQP//AOjeJp11IgAAAKUnU8UAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABLSURBVCjPY2CgGWBEF2BCV6CsSEAF1AwWdGGCAg4sDA6oCljRlTijKGBxcTU2dXHBowKLGRi24HEYG7oAO5pKtuIyNBF0FXAz6AgAIKoFEtTmtzoAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
-18.75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK////4BAQP//AOjeJp11IgAAAKfvjBcAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABGSURBVCjPY2CgH2BEFxASIKQCApgpF2BmQRcxMkCRNzZRUjE2xqMCmxm4rWVFF2BDF2BC0xqmpBaAKoKuAm4GHLAy0BoAAAX/AzP/OS5ZAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
-25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAVUExURQAAAP//AIBAQP///+jeJp11IgAAAED0BZ0AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABASURBVCjPY2AYQMBIrkYm0gUw7FJWQOEqKRobKingU4HFDLgtLOgCrLgE4MDZAYXLEmpsGoJXBRYzMARYGKgMAOh1A7a87uX/AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
-31.25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAMqNHoBAQP//AP///+jeJp11IgAAAJzEqA0AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAAA/SURBVCjPY2AYQMBINZOYSBdQVkCVVzIxUsKrAskMVnQBNlwCcMCCLhASgMINS3FxSQvApwKLGWwEBVgZKAMAVpgEqhjlEugAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
-37.5%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK4BAQP//AP///+jeJp11IgAAAI4kYI4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABCSURBVCjPY2AYQMBIO6OZCAowo/GVTIwUcKhgRTcDQ4AN3XR0AVYWVjSRlAQU+bAUF5e0UDwqsJlB0FoGVoIC+AEAABgEir5ix0QAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
-43.75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAASUExURQAAAIBAQP///+jeJp11IgAAADsY/HQAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAAA/SURBVCjPY2AYIYCRkACjkCAuFcy4BOCABY1vwMJggKqACV2JkwMyj9nESUnJxRiPCixmYNiC4Q5Ml2II4AcAAk4DUYZSyogAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
-50%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK4BAQP//AP///+jeJp11IgAAAI4kYI4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABCSURBVCjPY2AYQMBIO6OZCAowo/GVTIwUcKhgRTcDQ4AN3XR0AVYWVjSRlAQU+bAUF5e0UDwqsJlB0FoGVoIC+AEAABgEir5ix0QAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
-56.25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAMqNHoBAQP//AP///+jeJp11IgAAAJzEqA0AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAAA/SURBVCjPY2AYQMBINZOYSBdQVkCVVzIxUsKrAskMVnQBNlwCcMCCLhASgMINS3FxSQvApwKLGWwEBVgZKAMAVpgEqhjlEugAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
-62.5%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAVUExURQAAAP//AIBAQP///+jeJp11IgAAAED0BZ0AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABASURBVCjPY2AYQMBIrkYm0gUw7FJWQOEqKRobKingU4HFDLgtLOgCrLgE4MDZAYXLEmpsGoJXBRYzMARYGKgMAOh1A7a87uX/AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
-68.75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK////4BAQP//AOjeJp11IgAAAKfvjBcAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABGSURBVCjPY2CgH2BEFxASIKQCApgpF2BmQRcxMkCRNzZRUjE2xqMCmxm4rWVFF2BDF2BC0xqmpBaAKoKuAm4GHLAy0BoAAAX/AzP/OS5ZAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
-75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAbUExURQAAAJ+IK8qNHv///4BAQP//AOjeJp11IgAAAKUnU8UAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABLSURBVCjPY2CgGWBEF2BCV6CsSEAF1AwWdGGCAg4sDA6oCljRlTijKGBxcTU2dXHBowKLGRi24HEYG7oAO5pKtuIyNBF0FXAz6AgAIKoFEtTmtzoAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
-81.25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK8qNHv//AP///4BAQOjeJgAAAN0uv6IAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABISURBVCjPY2CgFmBEF2BCF2BG4wuZGAngVwE1gxXdFlZ0dQQFWJnRRUICUORDg12cQ0PxqMBmBunuQAiwocukJKAJYKgYAAAAGx8EzWfNr3EAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
-87.5%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAVUExURQAAAJ+IK8qNHv//AP///4BAQAAAAOCSvx4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABESURBVCjPY2AgEzCiCzARFBAWQDVBycRIEa8KnIayoruDFV0dhgAzukBIAAo3NNjFOTQAnwosZhC2FkMAN2AhXin9AAAgPQQ/+mISGQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0yOVQxNjo1OTo0OSswMDowMEOaOnwAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMjlUMTY6NTk6NDErMDA6MDABKMynAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA5LTI5VDE3OjAwOjUyKzAwOjAw+6updgAAAABJRU5ErkJggg==), auto;}
-93.75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK8qNHv//AP///4BAQJ11IgAAAA5UGgAAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABESURBVCjPY2AgDjCiCzARFGBGFxARQOEKKbs4KwngU4HFDBzWsqK7lBVdHYZAcACqfKiJaSheFcQYiiFAAmCjQC/NAADJ6APJy9tdKAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0yOVQxNjo1OTo0OSswMDowMEOaOnwAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMjlUMTY6NTk6NDErMDA6MDABKMynAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA5LTI5VDE3OjAwOjUyKzAwOjAw+6updgAAAABJRU5ErkJggg==), auto;}
-}
-body { animation: sparklecursor 800ms step-end infinite; }
-a:hover{ animation: starcursor 800ms step-end infinite;  }
-
-.intro__logo{position:relative;grid-column: 2 / 8;align-self: center;z-index: 10;pointer-events: none;}
-  .intro__logo__1{width:100%;display:block;mix-blend-mode: screen;filter: brightness(0.4) sepia(1) saturate(10) hue-rotate(-40deg) blur(0px) contrast(1.5) }
-  .intro__logo__2{position:absolute;top:10%;left:0;right:0;width:100%;display:block;mix-blend-mode: screen;filter: brightness(0.4) sepia(1) saturate(10) hue-rotate(80deg) blur(0px) contrast(1.5);}
-  .intro__logo__3{position:absolute;top:20%;left:0;right:0;width:100%;display:block;mix-blend-mode: screen;filter: brightness(0.4) sepia(1) saturate(10) hue-rotate(200deg) blur(0px) contrast(1.5);}
-  .intro__logo__scratch{position:absolute;top:0;left:0;width: 120lvh;max-width: unset;}
-.intro__man{position:relative;aspect-ratio: 1/1;grid-column: 9 / 14;margin-top: 25%;align-self: center;background-color: #222;}
-  .intro__man__scratch{position:absolute;top: -12%;left: -17%;width: 138%;max-width: unset;}
-  .intro__man__vid{width: 100%;border-radius: 50%;}
-.intro__kissingpeople{position: relative;grid-column: 1 / 11;z-index: -10; margin-left: min(2rem, 7vw);}
-  .intro__kissingpeople__img{width:100%;position:absolute;}
-.intro__review{color: #00f;font-size: 3rem;grid-column: 7 / 15;margin-right: 1rem;}
-.intro__tweet{position: relative;grid-column: 2 / 8;z-index: 2;top:4rem;mix-blend-mode: screen;}
-  .intro__tweet__img{width:100%;position:absolute;}
-.intro__kitchen{grid-column: 1 / 8;mix-blend-mode: hard-light;}
-.intro__lady{grid-column: 11 / 15;}
-
-.essays__gunman {position: absolute;bottom: 0;width: 75%;right:0;height: calc(100% - 17rem);z-index: -5;mix-blend-mode:multiply;object-fit: cover;}
-.essays__angelbear{grid-column: 2 / 6; position:relative;image-rendering: pixelated;width: 100%;}
-.essays__staggering {position: relative;grid-column: 7 / 14;aspect-ratio: 4 / 3; z-index: 2}
-  .essays__staggering__img {position: absolute;width: 100%;}
-.essays__piss {position: relative;grid-column: 2 / 11;mix-blend-mode: screen; z-index: 4}
-  .essays__piss__img {position: absolute;width: 100%;transform: translateY(-20%);}
-.essays__treerain {grid-column: 1 / 9;    width: 100%;}
-.essays__star {position: relative;grid-column: 11 / 14;mix-blend-mode: screen;top:15rem}
-.essays__roosterking {grid-column: 3 / 11; display: block; position: relative;}
-  .essays__roosterking__img{position: relative;}
-  .essays__roosterking__link{position: absolute; top:0; left:0; font-size:1.5rem; text-decoration: underline; color: #fff}
-.essays__list {grid-column: 2 / 8;color: #fff;margin: 2rem 0;position: relative;z-index: 10;}
-  .essays__list__title {font-size: 2rem;}
-
-.songs__flowers {position: absolute;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover;z-index: -5;overflow:hidden;}
-  .songs__flowers__img {position: absolute;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover;}
-.songs__store {position: relative;grid-column: 11 / 15;mix-blend-mode: hard-light; opacity: 0.9}
-  .songs__store__img {position: absolute;width: 100%;transform: translateY(-50%);}
-.songs__title {grid-column: 2 / 12;font-size: 3.5rem;position: relative; z-index: 5}
-.songs__tracks{grid-column: 2 / 8;mix-blend-mode: hard-light;z-index: 10;}
-.songs__roadloop {position: relative;grid-column: 8 / 14;aspect-ratio: 1 / 1;display: flex;align-items: center;justify-content: center;align-self: end;margin-bottom: 2rem;}
-  .songs__roadloop__img {position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
-  .songs__roadloop__text {position: relative;max-width: 11em;color: #000;}
-.songs__blurstreet{
-    grid-column: 8 / 15; 
-    aspect-ratio: 1553 / 1000;
-    mix-blend-mode: hard-light;
-    --frames:8;
-    --reps:10;
-    background: url('img/songs__blurstreet.jpg');
-    background-size: auto calc(var(--frames)*100%);
-    background-position: center 0%;
-    
-    animation: 8000ms steps(calc((var(--frames) - 1) * var(--reps))) 0s infinite normal none running filmstrip;
-  }
-
-   @keyframes filmstrip {
-     0%{background-position: center 0%;}
-     100%{background-position: center calc(100%*var(--reps));}
-   }
-
-.digital__glitch {position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: -1;mix-blend-mode:multiply; overflow:hidden; }
-  .digital__glitch__img {position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: -1; }
-.digital__touch {position: relative;grid-column: 6 / 15;aspect-ratio: 4 / 1;mix-blend-mode: hard-light;}
-  .digital__touch__img{position: absolute; width: 100%; }
-.digital__cowboy{grid-column: 2 / 6; position:relative; z-index: 5;mix-blend-mode: screen;image-rendering: pixelated;width: 100%;}
-.digital__smoke {position: relative;grid-column: 1 / 11;mix-blend-mode: difference; aspect-ratio: 4 / 1;}
-  .digital__smoke__img {position: absolute;top: 0;left:0;width: 100%;height:max(50lvh, 50vw); object-fit:cover; object-position: bottom right;}
-.digital__text {position: relative;grid-column: 4 / 7;color: #fff; align-self: center;margin-top: 2rem; margin-bottom:2rem;}
-
-
-
-.ai__trash {position: absolute;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover;z-index: -1;}
-.ai__title {grid-column: 7 / 14;margin-top: 2rem;margin-bottom: -4rem;}
-  .ai__title__text {color: #00f;font-size: 3.5rem;}
-    .ai__title__text__ai {font-size: .5em;display: inline-block;transform: skew(-43deg, 0deg) scaleX(3.5) scaleY(1.4) translateX(-0.3em);margin-left: 2.2em;}
-.ai__1 {position: relative;grid-column: 2 / 5;aspect-ratio: 2 / 1;margin-bottom: .5rem; mix-blend-mode: hard-light;}
-  .ai__1__img{position: absolute;}
-.ai__2 {position: relative;grid-column: 4 / 8;aspect-ratio: 2 / 1;margin-bottom: .5rem; mix-blend-mode: hard-light;z-index:2;}
-  .ai__2__img{position: absolute;}
-.ai__3 {position: relative;grid-column: 3 / 7;aspect-ratio: 1 / 1;margin-bottom: 2rem; mix-blend-mode: hard-light;}
-  .ai__3__img{position: absolute;}
-.ai__gay {color: #fff;grid-column: 11 / 14;}
-
-.gas__station {position: relative;grid-column: 5 / 14;aspect-ratio: 2 / 1;}
-  .gas__station__img{position: absolute; width: 100%}
-.gas__text {grid-column: 2 / 8;position: relative;}
-
-.pitbull__text {grid-column: 6 / 11;color: #fff;align-self: center;}
-.pitbull__wrap{position: relative;grid-column: 11 / 15; aspect-ratio: 1 / 1;align-self: center;}
-  .pitbull__lady{position: absolute;top:0;left:0;width:100%;height:100%;background: url(img/intro__lady.jpg);background-size: auto 113%;background-position: 85% 100%;transform: rotate(90deg);display: none;}
-  .pitbull__img{width:100%;}
-
-.section--intro{padding-top: 3rem;}
-.section--essays{}
-.section--songs{padding-bottom:3rem;}
-.section--digital{margin-top:3rem; margin-bottom:3rem;}
-.section--gas{margin-top:3rem; margin-bottom:3rem;}
-.section--ai{}
-.section--pitbull{padding-top:10rem; padding-bottom: 5rem; margin-bottom: 5rem;}
-
-
-@media screen and (max-width: 750px) {
-
-  .intro__logo{grid-column: 2 / 14;}
-    .intro__logo__1{}
-    .intro__logo__2{}
-    .intro__logo__3{}
-    .intro__logo__scratch{}
-  .intro__man{grid-column: 6 / 14;}
-    .intro__man__scratch{}
-    .intro__man__vid{}
-  .intro__kissingpeople{grid-column: 1 / 14;}
-    .intro__kissingpeople__img{}
-  .intro__review{grid-column: 3 / 15; margin-right: .25rem;}
-  .intro__tweet{grid-column: 2 / 14;}
-    .intro__tweet__img{}
-  .intro__kitchen{grid-column: 1 / 10;}
-  .intro__lady{grid-column: 10 / 15;}
-
-  .essays__gunman {height: calc(100% - 87vw)}
-  .essays__angelbear{grid-column: 1 / 6;}
-  .essays__staggering {    grid-column: 6 / 15;}
-    .essays__staggering__img {}
-  .essays__piss {    grid-column: 2 / 11;}
-    .essays__piss__img {}
-  .essays__treerain {grid-column: 1 / 13;}
-  .essays__star {top:5rem}
-  .essays__roosterking {grid-column: 2 / 14;}
-  .essays__list {grid-column: 2 / 14;}
-    .essays__list__title {}
-
-  .songs__flowers {}
-  .songs__store {    grid-column: 6 / 15;     aspect-ratio: 2 / 1;}
-    .songs__store__img {}
-  .songs__title {grid-column: 2 / 15; margin-right:.25rem;}
-  .songs__tracks{grid-column: 2 / 14;}
-  .songs__roadloop {grid-column: 2 / 14;}
-    .songs__roadloop__img {}
-    .songs__roadloop__text {}
-  .songs__blurstreet{grid-column: 4 / 15;}
-
-  .digital__glitch {}
-  .digital__touch {grid-column: 3 / 15}
-    .digital__touch__img{}
-  .digital__smoke {grid-column: 1 / 12}
-    .digital__smoke__img {}
-  .digital__cowboy{grid-column: 2 / 9;}
-  .digital__text {grid-column: 2 / 10;}
-
-  .gas__station {grid-column: 3 / 15;}
-    .gas__station__img{}
-  .gas__text {grid-column: 2 / 12;}
-
-  .ai__trash {}
-  .ai__title {grid-column: 2 / 14; margin-bottom: 2rem;}
-    .ai__title__text {}
-      .ai__title__text__ai {}
-  .ai__1 {grid-column: 2 / 9;}
-    .ai__1__img{}
-  .ai__2 {grid-column: 6 / 14;}
-    .ai__2__img{}
-  .ai__3 {grid-column: 4 / 12;}
-    .ai__3__img{}
-  .ai__gay {}
-
-  .pitbull__text {grid-column: 2 / 9;}
-  .pitbull__wrap {    grid-column: 9 / 15;}
-
-  .section--intro{}
-  .section--essays{}
-  .section--songs{}
-  .section--digital{}
-  .section--gas{}
-  .section--ai{}
-  .section--pitbull{}
-}
-
-@media screen and (max-width: 450px) {
-  .songs__title {font-size: 3.5rem;}
-}
-
-@media screen and (max-width: 325px) {
-  .intro__review{font-size: 2rem;}
-  .songs__title {font-size: 3rem;}
-}
-
-    @supports (animation-timeline: --section) {
-/*  aka "if it supports css scroll-timeline animations:"*/
-
-    .intro__logo__1{
-        animation: linear intro__logo__1 both;
-        animation-timeline: --section;
-        animation-range: exit-crossing 0% exit-crossing 100%;
-    }
-
-    @keyframes intro__logo__1 {
-      0% {transform: translateY(0%) scale(1.0);}
-      100% {transform: translateY(100%) scale(1);}
-    }
-
-    .intro__logo__2{
-        animation: linear intro__logo__2 both;
-        animation-timeline: --section;
-        animation-range: exit-crossing 0% exit-crossing 100%;
-    }
-
-    @keyframes intro__logo__2 {
-      0% {transform: translateY(0%) scale(1.0);}
-      100% {transform: translateY(225%) scale(1.1);}
-    }
-
-    .intro__logo__3{
-        animation: linear intro__logo__3 both;
-        animation-timeline: --section;
-        animation-range: exit-crossing 0% exit-crossing 100%;
-    }
-
-    @keyframes intro__logo__3 {
-      0% {transform: translateY(0%) scale(1);}
-      100% {transform: translateY(350%) scale(1.2);}
-    }
-
-    .intro__man__vid{
-        animation: linear intro__man__vid both;
-        animation-timeline: --section;
-        animation-range: exit-crossing 0% exit-crossing 100%;
-        mix-blend-mode: screen;
-    }
-
-    @keyframes intro__man__vid {
-      0% {
-        transform: translateY(0) rotate(0deg);  
-/*        filter: brightness(1) sepia(1) saturate(0) hue-rotate(0deg) blur(1px)*/
+      @keyframes sparklecursor{
+      0%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAVUExURQAAAJ+IK8qNHv//AP///4BAQAAAAOCSvx4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABESURBVCjPY2AgEzCiCzARFBAWQDVBycRIEa8KnIayoruDFV0dhgAzukBIAAo3NNjFOTQAnwosZhC2FkMAN2AhXin9AAAgPQQ/+mISGQAAABR0RVh0Y29tbWVudABGdSBIdW5nLW1pbmce2WAPAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
+      6.25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK8qNHv//AP///4BAQOjeJgAAAN0uv6IAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABISURBVCjPY2CgFmBEF2BCF2BG4wuZGAngVwE1gxXdFlZ0dQQFWJnRRUICUORDg12cQ0PxqMBmBunuQAiwocukJKAJYKgYAAAAGx8EzWfNr3EAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
+      12.5%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAbUExURQAAAJ+IK8qNHv///4BAQP//AOjeJp11IgAAAKUnU8UAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABLSURBVCjPY2CgGWBEF2BCV6CsSEAF1AwWdGGCAg4sDA6oCljRlTijKGBxcTU2dXHBowKLGRi24HEYG7oAO5pKtuIyNBF0FXAz6AgAIKoFEtTmtzoAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
+      18.75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK////4BAQP//AOjeJp11IgAAAKfvjBcAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABGSURBVCjPY2CgH2BEFxASIKQCApgpF2BmQRcxMkCRNzZRUjE2xqMCmxm4rWVFF2BDF2BC0xqmpBaAKoKuAm4GHLAy0BoAAAX/AzP/OS5ZAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
+      25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAVUExURQAAAP//AIBAQP///+jeJp11IgAAAED0BZ0AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABASURBVCjPY2AYQMBIrkYm0gUw7FJWQOEqKRobKingU4HFDLgtLOgCrLgE4MDZAYXLEmpsGoJXBRYzMARYGKgMAOh1A7a87uX/AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
+      31.25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAMqNHoBAQP//AP///+jeJp11IgAAAJzEqA0AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAAA/SURBVCjPY2AYQMBINZOYSBdQVkCVVzIxUsKrAskMVnQBNlwCcMCCLhASgMINS3FxSQvApwKLGWwEBVgZKAMAVpgEqhjlEugAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
+      37.5%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK4BAQP//AP///+jeJp11IgAAAI4kYI4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABCSURBVCjPY2AYQMBIO6OZCAowo/GVTIwUcKhgRTcDQ4AN3XR0AVYWVjSRlAQU+bAUF5e0UDwqsJlB0FoGVoIC+AEAABgEir5ix0QAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
+      43.75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAASUExURQAAAIBAQP///+jeJp11IgAAADsY/HQAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAAA/SURBVCjPY2AYIYCRkACjkCAuFcy4BOCABY1vwMJggKqACV2JkwMyj9nESUnJxRiPCixmYNiC4Q5Ml2II4AcAAk4DUYZSyogAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
+      50%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK4BAQP//AP///+jeJp11IgAAAI4kYI4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABCSURBVCjPY2AYQMBIO6OZCAowo/GVTIwUcKhgRTcDQ4AN3XR0AVYWVjSRlAQU+bAUF5e0UDwqsJlB0FoGVoIC+AEAABgEir5ix0QAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
+      56.25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAMqNHoBAQP//AP///+jeJp11IgAAAJzEqA0AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAAA/SURBVCjPY2AYQMBINZOYSBdQVkCVVzIxUsKrAskMVnQBNlwCcMCCLhASgMINS3FxSQvApwKLGWwEBVgZKAMAVpgEqhjlEugAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
+      62.5%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAVUExURQAAAP//AIBAQP///+jeJp11IgAAAED0BZ0AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABASURBVCjPY2AYQMBIrkYm0gUw7FJWQOEqKRobKingU4HFDLgtLOgCrLgE4MDZAYXLEmpsGoJXBRYzMARYGKgMAOh1A7a87uX/AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
+      68.75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK////4BAQP//AOjeJp11IgAAAKfvjBcAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABGSURBVCjPY2CgH2BEFxASIKQCApgpF2BmQRcxMkCRNzZRUjE2xqMCmxm4rWVFF2BDF2BC0xqmpBaAKoKuAm4GHLAy0BoAAAX/AzP/OS5ZAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTI5VDE2OjU5OjQ5KzAwOjAwQ5o6fAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0yOVQxNjo1OTo0MSswMDowMAEozKcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDktMjlUMTc6MDA6NTIrMDA6MDD7q6l2AAAAAElFTkSuQmCC), auto;}
+      75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAbUExURQAAAJ+IK8qNHv///4BAQP//AOjeJp11IgAAAKUnU8UAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABLSURBVCjPY2CgGWBEF2BCV6CsSEAF1AwWdGGCAg4sDA6oCljRlTijKGBxcTU2dXHBowKLGRi24HEYG7oAO5pKtuIyNBF0FXAz6AgAIKoFEtTmtzoAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
+      81.25%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK8qNHv//AP///4BAQOjeJgAAAN0uv6IAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABISURBVCjPY2CgFmBEF2BCF2BG4wuZGAngVwE1gxXdFlZ0dQQFWJnRRUICUORDg12cQ0PxqMBmBunuQAiwocukJKAJYKgYAAAAGx8EzWfNr3EAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjlUMTY6NTk6NDkrMDA6MDBDmjp8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI5VDE2OjU5OjQxKzAwOjAwASjMpwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wOS0yOVQxNzowMDo1MiswMDowMPurqXYAAAAASUVORK5CYII=), auto;}
+      87.5%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAVUExURQAAAJ+IK8qNHv//AP///4BAQAAAAOCSvx4AAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABESURBVCjPY2AgEzCiCzARFBAWQDVBycRIEa8KnIayoruDFV0dhgAzukBIAAo3NNjFOTQAnwosZhC2FkMAN2AhXin9AAAgPQQ/+mISGQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0yOVQxNjo1OTo0OSswMDowMEOaOnwAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMjlUMTY6NTk6NDErMDA6MDABKMynAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA5LTI5VDE3OjAwOjUyKzAwOjAw+6updgAAAABJRU5ErkJggg==), auto;}
+      93.75%{cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAYUExURQAAAJ+IK8qNHv//AP///4BAQJ11IgAAAA5UGgAAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+cJHREANFSmUVsAAABESURBVCjPY2AgDjCiCzARFGBGFxARQOEKKbs4KwngU4HFDBzWsqK7lBVdHYZAcACqfKiJaSheFcQYiiFAAmCjQC/NAADJ6APJy9tdKAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0yOVQxNjo1OTo0OSswMDowMEOaOnwAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMjlUMTY6NTk6NDErMDA6MDABKMynAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA5LTI5VDE3OjAwOjUyKzAwOjAw+6updgAAAABJRU5ErkJggg==), auto;}
       }
-      100% {
-        transform: translateY(250%) rotate(180deg); 
-/*        filter: brightness(0) sepia(1) saturate(10) hue-rotate(400deg) blur(7px);*/
+      body { animation: sparklecursor 800ms step-end infinite; }
+      a:hover{ animation: starcursor 800ms step-end infinite;  }
+
+      /*
+       * The grid: the original's columns were (100vw - 50rem) / 2 at each
+       * side and twelve equal ones between, in a section at most 60rem wide.
+       * That's portamento's 14-track row with the body as the section's
+       * width less those two sides. Its sections didn't clip sideways (the
+       * page did), so these don't either.
+       */
+      .section {
+        max-width: 60rem;
+        margin: 0 auto;
+        overflow-x: visible;
       }
-    }
-
-/*    .intro__kissingpeople{
-        animation: linear intro__kissingpeople both;
-        animation-timeline: --section;
-        animation-range: exit-crossing 0% exit-crossing 100%;
-    }
-
-    @keyframes intro__kissingpeople {
-      0% {transform: translateY(0rem);}
-      100% {transform: translateY(25rem);}
-
-    }*/
-
-    .intro__kitchen{
-        animation: linear intro__kitchen both;
-        animation-timeline: --section;
-        animation-range: exit-crossing 0% exit-crossing 100%;
-    }
-
-    @keyframes intro__kitchen {
-      0% {transform: translateY(1rem);}
-      100% {transform: translateY(-8rem);}
-    }
-
-    .intro__review{
-        animation: linear intro__review both;
-        animation-timeline: --section;
-        animation-range: exit-crossing 0% exit-crossing 100%;
-    }
-
-    @keyframes intro__review {
-      0% {transform: translateY(3rem);}
-      100% {transform: translateY(-3rem);}
-    }
-
-/*------------------------------------*/
-
-    .essays__angelbear{
-        animation: linear essays__angelbear both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-        z-index: 5;
-    }
-
-    @keyframes essays__angelbear {
-      0% {transform: translateX(-3rem);}
-      100% {transform: translateX(6rem);}
-    }
-
-    .essays__piss{
-        animation: linear essays__piss both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes essays__piss {
-      0% {transform: translateY(7rem);}
-      100% {transform: translateY(-7rem);}
-    }
-
-    .essays__treerain{
-        animation: linear essays__treerain both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes essays__treerain {
-      0% {transform: translateY(-6rem);}
-      100% {transform: translateY(3rem);}
-    }
-
-    .essays__gunman{
-        animation: linear essays__gunman both;
-        animation-timeline: --section;
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes essays__gunman {
-      0% {transform: translateY(-7rem);}
-      100% {transform: translateY(7rem);}
-    }
-
-    .essays__star{
-        animation: ease essays__star both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-        z-index: 5;
-    }
-
-    @keyframes essays__star {
-      0% {transform: translateY(-5rem) rotate(-1000deg);}
-      100% {transform: translateY(5rem) rotate(20deg);}
-    }
-
-/*------------------------------------*/
-
-
-    .songs__store{
-        animation: linear songs__store both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes songs__store {
-      0% {transform: translateY(5rem);}
-      100% {transform: translateY(-5rem);}
-    }
-
-    .songs__roadloop__text{
-        animation: linear songs__roadloop__text both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes songs__roadloop__text {
-      0% {transform: rotate(-20deg);}
-      100% {transform: rotate(20deg);}
-    }
-
-    .songs__blurstreet{
-      animation: steps(calc((var(--frames) - 1) * var(--reps))) filmstrip both;
-      animation-timeline: --section;
-      animation-range: cover 0% cover 100%;
-    }
-
-/*------------------------------------*/
-
-
-    .digital__glitch__img{
-        animation: linear digital__glitch__img both;
-        animation-timeline: --section;
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes digital__glitch__img {
-      0% {transform: translateY(-50%);}
-      100% {transform: translateY(50%);}
-    }
-
-    .digital__touch{
-        animation: linear digital__touch both;
-        animation-timeline: --section;
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes digital__touch {
-      0% {transform: translateY(-2rem);}
-      100% {transform: translateY(7rem);}
-    }
-
-    .digital__cowboy{
-        animation: linear digital__cowboy both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes digital__cowboy {
-      0% {transform: translateY(5rem);}
-      100% {transform: translateY(-5rem);}
-    }
-
-/*------------------------------------*/
-
-    .gas__station{
-        animation: ease gas__station both;
-        animation-timeline: view();
-        animation-range: contain 0% cover 100%;
-    }
-
-    @keyframes gas__station {
-      0% {transform: translateX(-2rem);opacity:0}
-      50% {opacity:1}
-      100% {transform: translateX(0rem);opacity:1}
-    }
-
-/*------------------------------------*/
-
-    .ai__1{
-        animation: linear ai__1 both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes ai__1 {
-      0% {transform: translateY(3rem);}
-      100% {transform: translateY(-3rem);}
-    }
-
-    .ai__2{
-        animation: linear ai__2 both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes ai__2 {
-      0% {transform: translateY(9rem);}
-      100% {transform: translateY(-9rem);}
-    }
-    .ai__3{
-        animation: linear ai__3 both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes ai__3 {
-      0% {transform: translateY(6rem);}
-      100% {transform: translateY(-6rem);}
-    }
-
-    .ai__title{
-        animation: linear ai__title both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
-
-    @keyframes ai__title {
-      0% {transform: translateY(2rem);}
-      100% {transform: translateY(-2rem);}
-    }
-
-/*------------------------------------*/
-
-
-    .pitbull__wrap{
-        animation: ease pitbull__wrap both;
-        animation-timeline: --section;
-        animation-range: entry-crossing 50% entry-crossing 100%;
-    }
-
-    @keyframes pitbull__wrap {
-      0% {transform: translateY(-100%) scale(.7) rotate(-360deg);}
-      100% {transform: translateY(0rem);}
-    }
-
-    .pitbull__lady{
-      display: block;
-    }
-
-    .pitbull__img{
-        animation: linear pitbull__img both;
-        animation-timeline: --section;
-        animation-range: entry-crossing 50% entry-crossing 100%;
-    }
-
-    @keyframes pitbull__img {
-      0% {opacity:0}
-      100% {opacity:1}
-    }
-
-}
-
-</style>
-
-
-<section class="gridlayout section--intro">
-  <div class="intro__logo">
-    <img class="intro__logo__1" src="img/intro__logo.svg" >
-    <img class="intro__logo__2" src="img/intro__logo.svg" >
-    <img class="intro__logo__3" src="img/intro__logo.svg" >
-    <img class="intro__logo__scratch" src="img/intro__logoscratch-trim.png" >
-  </div>
-
-
-<div class="intro__man" >
-  <img class="intro__man__scratch" src="img/intro__manoutline-trim.png" >
-  <img class="intro__man__vid" src="img/intro__man.webp"></video>
-</div>
-
-<div class="intro__kissingpeople"><img class="intro__kissingpeople__img" src="img/intro__kissingpeople.jpg" > </div>
-
-<q class="intro__review handwriting" >it really does look off‑puttingly bad to most people, best to delete your website/portfolio</q>
-<div class="intro__tweet"><img class="intro__tweet__img" src="img/intro__tweet.png" > </div>
-
-<img class="intro__kitchen" src="img/intro__kitchen.jpg">
-<img class="intro__lady" src="img/intro__lady.jpg">
-
-</section>
-
-<section class="gridlayout section--essays">
-  <img class="essays__gunman" src="img/essays__gunman.png">
-  <img class="essays__angelbear" src="img/essays__angelbear.gif">
-  <div class="essays__staggering"><img class="essays__staggering__img" src="img/essays__staggering.jpg"></div>
-  <div class="essays__piss"><img class="essays__piss__img" src="img/essays__piss.jpg"></div>
-  <img class="essays__treerain" src="img/essays__treerain.webp">
-
-  <img class="essays__star" src="img/essays__star.jpg">
-
-  <a href="https://roosterking.drewschorno.com" class="essays__roosterking">
-      <img class="essays__roosterking__img" src="img/roosterking.webp">
-      <p class="essays__roosterking__link">Click here to see my award winning multimedia memoir masterpiece "Rooster King"</p>
-    </a>
-
-  <div class="essays__list">
-
-    <h3 class="essays__list__title">My Essays</h3>
-    <p>/////////////////////////////</p>
-    <p><a href="https://arcove.substack.com/p/kamikaze-dreaming">kamikaze dreaming:</a> an antiresume</p>
-    <p><a href="https://arcove.substack.com/p/six-masks">six masks:</a> a memoir of my time in clown school</p>
-    <p><a href="https://arcove.substack.com/p/units-of-breath">units of breath:</a> how do you measure your life</p>
-    <p><a href="https://arcove.substack.com/p/iron-lotus">iron lotus:</a> cats in jars as a metaphor for something to do with childhoods or whatever</p>
-    <p><a href="https://arcove.substack.com/p/null-call">null call:</a> advice for the vestigial shamans among us</p>
-    <p><a href="https://arcove.substack.com/p/four-songs">four songs:</a> meditations on maureen</p>
-    <p><a href="https://arcove.substack.com/p/generative-adversarial-relationships">generative adversarial relationships:</a> human creative systems through the lens of our AI counterparts</p>
-    <p><a href="https://arcove.substack.com/p/the-form-of-formats">the form of formats:</a> how to play a game that doesn't exist</p>
-  </div>
-
-</section>
-
-<section class="gridlayout section--songs">
-  <div class="songs__flowers"><img class="songs__flowers__img" src="img/songs__flowers.jpg"></div>
-  <div class="songs__store"><img class="songs__store__img" src="img/songs__store.jpg"></div>
-
-  <h2 class="songs__title">lofi beats for lying on the floor & eating string cheese</h2>
-
-  <div class="songs__tracks">
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1187693716&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
-
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/947681068&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
-
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/666285821&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
-  </div>
-
-  <div class="songs__roadloop">
-    <img class="songs__roadloop__img" src="img/songs__roadloop.gif">
-    <p class="songs__roadloop__text">hey im going to the store, do you want anything?</p>
-  </div>
-
-
-
- <!-- <div class="songs__blurstreet"></div> -->
-</section>
-
-<section class="gridlayout section--digital">
-  <div class="digital__glitch"><img class="digital__glitch__img" src="img/digital__glitch.jpg"></div>
-  <div class="digital__touch"><img class="digital__touch__img" src="img/digital__touch.jpg"></div>
-
-  <div class="digital__smoke">
-    <img class="digital__smoke__img" src="img/digital__smoke.gif">
-  </div>
-
-  <img class="digital__cowboy" src="img/digital__cowboy.gif">
-  <p class="digital__text">when the end of the world comes, you know where i'll be</p>
-  
-</section>
-
-<section class="gridlayout section--gas">
-  <div class="gas__station"><img class="gas__station__img" src="img/gas__station.jpg"></div>
-  <img class="gas__text" src="img/gas__text-trim.png">
-</section>
-
-<section class="gridlayout section--ai">
-  <img class="ai__trash" src="img/ai__trash.jpg">
-  <div class="ai__title"><span class="handwriting ai__title__text">i can’t wait for <span class="monospace ai__title__text__ai">ai</span> art to end design forever</span></div>
-  <div class="ai__1"><img class="ai__1__img" src="img/ai__1.jpeg"></div>
-  <div class="ai__2"><img class="ai__2__img" src="img/ai__2.jpeg"></div>
-  <div class="ai__3"><img class="ai__3__img" src="img/ai__3.jpeg"></div>
-
-
-  <p class="ai__gay">also i'm sorry that i'm gay</p>
-</section>
-
-<section class="gridlayout section--pitbull">
-  <p class="pitbull__text" >hey did you know that i made an album cover for pitbull? cause i did, yeah. he’s a big celebrity if you didn’t know that. it’s not that big of a deal but some people think it’s kindof cool. yeah ha ha that was crazy...</p>
-
-  <div class="pitbull__wrap">
-  <div class="pitbull__lady"></div>
-  <img class="pitbull__img" src="img/pitbull.jpg">
-</div>
-
-</section>
-
-</body>
+      .grid {
+        --pt-body-width: calc(100% - max(0px, 100vw - 50rem));
+        --pt-col-gap: min(2rem, 7vw);
+        overflow-x: visible;
+      }
+      /* grid items sat at the top of their row unless they said otherwise,
+         filling their columns, and so did what's inside them: a short line
+         of text starts at the left, and an absolute image with no top sits
+         where it would in flow, at the top of the box, not a layer's middle */
+      :where(.grid) > pt-layer {
+        align-self: start;
+        --pt-align-x: 0;
+        --pt-align-y: 0;
+      }
+
+      /* intro */
+      .section--intro { padding-top: 3rem; }
+      .intro__logo { align-self: center; z-index: 10; pointer-events: none; }
+        .intro__logo__box { position: relative; width: 100%; }
+        .intro__logo__1 { display: block; mix-blend-mode: screen; filter: brightness(0.4) sepia(1) saturate(10) hue-rotate(-40deg) blur(0px) contrast(1.5); }
+        .intro__logo__2 { position: absolute; top: 10%; left: 0; right: 0; mix-blend-mode: screen; filter: brightness(0.4) sepia(1) saturate(10) hue-rotate(80deg) blur(0px) contrast(1.5); }
+        .intro__logo__3 { position: absolute; top: 20%; left: 0; right: 0; mix-blend-mode: screen; filter: brightness(0.4) sepia(1) saturate(10) hue-rotate(200deg) blur(0px) contrast(1.5); }
+        .intro__logo__scratch { position: absolute; top: 0; left: 0; width: 120lvh; max-width: unset; }
+      .intro__man { align-self: center; }
+        .intro__man__box { position: relative; width: 100%; aspect-ratio: 1 / 1; margin-top: 25%; background-color: #222; }
+        .intro__man__scratch { position: absolute; top: -12%; left: -17%; width: 138%; max-width: unset; }
+        .intro__man__vid img { border-radius: 50%; }
+      .intro__kissingpeople { z-index: -10; }
+        .intro__kissingpeople__box { position: relative; margin-left: min(2rem, 7vw); width: calc(100% - min(2rem, 7vw)); }
+        .intro__kissingpeople__img { position: absolute; }
+      .intro__review { color: #00f; font-size: 3rem; margin-right: 1rem; }
+      .intro__tweet { position: relative; z-index: 2; top: 4rem; mix-blend-mode: screen; }
+        .intro__tweet__img { position: absolute; }
+      .intro__kitchen { mix-blend-mode: hard-light; }
+
+      /* essays */
+      .essays__gunman { position: absolute; bottom: 0; width: 75%; right: 0; height: calc(100% - 17rem); z-index: -5; mix-blend-mode: multiply; }
+        .essays__gunman img { height: 100%; object-fit: cover; }
+      .essays__angelbear { position: relative; }
+        .essays__angelbear img { image-rendering: pixelated; }
+      .essays__staggering { position: relative; aspect-ratio: 4 / 3; z-index: 2; }
+        .essays__staggering__img { position: absolute; }
+      .essays__piss { position: relative; mix-blend-mode: screen; z-index: 4; }
+        .essays__piss__img { position: absolute; transform: translateY(-20%); }
+      .essays__star { position: relative; mix-blend-mode: screen; top: 15rem; }
+      .essays__roosterking { display: block; position: relative; width: 100%; }
+        .essays__roosterking__img { position: relative; }
+        .essays__roosterking__link { position: absolute; top: 0; left: 0; font-size: 1.5rem; text-decoration: underline; color: #fff; }
+      .essays__list { z-index: 10; }
+        .essays__list__box { color: #fff; margin: 2rem 0; width: 100%; }
+        .essays__list__title { font-size: 2rem; }
+
+      /* songs */
+      .section--songs { padding-bottom: 3rem; }
+      .songs__flowers { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -5; overflow: hidden; }
+        .songs__flowers__img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+      .songs__store { position: relative; mix-blend-mode: hard-light; opacity: 0.9; }
+        .songs__store__img { position: absolute; transform: translateY(-50%); }
+      .songs__title { z-index: 5; }
+        .songs__title h2 { font-size: 3.5rem; }
+      .songs__tracks { mix-blend-mode: hard-light; z-index: 10; }
+        .songs__tracks__box { width: 100%; }
+      .songs__roadloop { align-self: end; }
+        .songs__roadloop__box { position: relative; width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; }
+        .songs__roadloop__img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .songs__roadloop__text { position: relative; max-width: 11em; color: #000; }
+
+      /* digital */
+      .section--digital { margin-top: 3rem; margin-bottom: 3rem; }
+      .digital__glitch { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; mix-blend-mode: multiply; overflow: hidden; }
+        .digital__glitch__img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .digital__glitch__img img { height: 100%; }
+      .digital__touch { position: relative; aspect-ratio: 4 / 1; mix-blend-mode: hard-light; }
+        .digital__touch__img { position: absolute; }
+      .digital__smoke { position: relative; mix-blend-mode: difference; aspect-ratio: 4 / 1; }
+        .digital__smoke__img { position: absolute; top: 0; left: 0; height: max(50lvh, 50vw); object-fit: cover; object-position: bottom right; }
+      .digital__cowboy { position: relative; z-index: 5; mix-blend-mode: screen; }
+        .digital__cowboy img { image-rendering: pixelated; }
+      .digital__text { align-self: center; }
+        .digital__text p { position: relative; color: #fff; margin-top: 2rem; margin-bottom: 2rem; }
+
+      /* gas */
+      .section--gas { margin-top: 3rem; margin-bottom: 3rem; }
+      .gas__station { position: relative; aspect-ratio: 2 / 1; }
+        .gas__station__img { position: absolute; }
+      @keyframes gas__fade {
+        0% { opacity: 0; }
+        50% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      .gas__text { position: relative; }
+
+      /* ai */
+      .ai__trash { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+      /* margins on the layers themselves, as their scroll animations measure them */
+      .ai__title { margin: 2rem 0 -4rem; }
+        .ai__title__text { color: #00f; font-size: 3.5rem; }
+        .ai__title__text__ai { font-size: .5em; display: inline-block; transform: skew(-43deg, 0deg) scaleX(3.5) scaleY(1.4) translateX(-0.3em); margin-left: 2.2em; }
+      .ai__1, .ai__2, .ai__3 { position: relative; aspect-ratio: 2 / 1; margin-bottom: .5rem; mix-blend-mode: hard-light; }
+      .ai__2 { z-index: 2; }
+      .ai__3 { aspect-ratio: 1 / 1; margin-bottom: 2rem; }
+        :is(.ai__1, .ai__2, .ai__3) img { position: absolute; }
+      .ai__gay { color: #fff; }
+
+      /* pitbull */
+      .section--pitbull { padding-top: 10rem; padding-bottom: 5rem; margin-bottom: 5rem; }
+      .pitbull__text { color: #fff; align-self: center; }
+      .pitbull__wrap { align-self: center; }
+        .pitbull__box { position: relative; width: 100%; aspect-ratio: 1 / 1; }
+        .pitbull__lady { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url(img/intro__lady.jpg); background-size: auto 113%; background-position: 85% 100%; transform: rotate(90deg); display: none; }
+
+      /* the phone layout's other changes (the columns are width maps) */
+      @media screen and (max-width: 750px) {
+        .intro__review { margin-right: .25rem; }
+        .essays__gunman { height: calc(100% - 87vw); }
+        .essays__star { top: 5rem; }
+        .songs__store { aspect-ratio: 2 / 1; }
+        .songs__title h2 { margin-right: .25rem; }
+        .ai__title { margin-bottom: 2rem; }
+      }
+      @media screen and (max-width: 450px) {
+        .songs__title h2 { font-size: 3.5rem; }
+      }
+      @media screen and (max-width: 325px) {
+        .intro__review { font-size: 2rem; }
+        .songs__title h2 { font-size: 3rem; }
+      }
+
+      /* only where the scroll animations run, as in the original */
+      @supports (animation-timeline: view()) {
+        .intro__man__vid { mix-blend-mode: screen; }
+        .essays__angelbear, .essays__star { z-index: 5; }
+        .pitbull__lady { display: block; }
+      }
+    </style>
+  </head>
+  <body>
+    <pt-group class="section">
+      <pt-row flow stack-below="0px" row-gap="0px" class="grid section--intro">
+        <pt-layer class="intro__logo" col-start="2" col-end="phone:13 phone:7">
+          <div class="intro__logo__box">
+            <pt-anim class="intro__logo__1" y-end="100%" timeline="--pt-group" range="exit-crossing"><img src="img/intro__logo.svg" alt="Drew Schorno" /></pt-anim>
+            <pt-anim class="intro__logo__2" y-end="225%" scale-end="1.1" timeline="--pt-group" range="exit-crossing"><img src="img/intro__logo.svg" alt="" /></pt-anim>
+            <pt-anim class="intro__logo__3" y-end="350%" scale-end="1.2" timeline="--pt-group" range="exit-crossing"><img src="img/intro__logo.svg" alt="" /></pt-anim>
+            <img class="intro__logo__scratch" src="img/intro__logoscratch-trim.png" alt="" />
+          </div>
+        </pt-layer>
+
+        <pt-layer class="intro__man" col-start="phone:6 phone:9" col-end="13">
+          <div class="intro__man__box">
+            <img class="intro__man__scratch" src="img/intro__manoutline-trim.png" alt="" />
+            <pt-anim class="intro__man__vid" y-end="250%" rotate-end="180deg" timeline="--pt-group" range="exit-crossing"><img src="img/intro__man.webp" alt="" /></pt-anim>
+          </div>
+        </pt-layer>
+
+        <pt-layer class="intro__kissingpeople" col-start="1" col-end="phone:13 phone:10">
+          <div class="intro__kissingpeople__box"><img class="intro__kissingpeople__img" src="img/intro__kissingpeople.jpg" alt="" /></div>
+        </pt-layer>
+
+        <pt-layer col-start="phone:3 phone:7" col-end="14" y-start="3rem" y-end="-3rem" timeline="--pt-group" range="exit-crossing">
+          <q class="intro__review handwriting">it really does look off‑puttingly bad to most people, best to delete your website/portfolio</q>
+        </pt-layer>
+        <pt-layer class="intro__tweet" col-start="2" col-end="phone:13 phone:7"><img class="intro__tweet__img" src="img/intro__tweet.png" alt="" /></pt-layer>
+
+        <pt-layer class="intro__kitchen" col-start="1" col-end="phone:9 phone:7" y-start="1rem" y-end="-8rem" timeline="--pt-group" range="exit-crossing"><img src="img/intro__kitchen.jpg" alt="" /></pt-layer>
+        <pt-layer col-start="phone:10 phone:11" col-end="14"><img src="img/intro__lady.jpg" alt="" /></pt-layer>
+      </pt-row>
+    </pt-group>
+
+    <pt-group class="section">
+      <pt-row flow stack-below="0px" row-gap="0px" class="grid section--essays">
+        <pt-anim class="essays__gunman" y-start="-7rem" y-end="7rem" timeline="--pt-group"><img src="img/essays__gunman.png" alt="" /></pt-anim>
+        <pt-layer class="essays__angelbear" col-start="phone:1 phone:2" col-end="5" x-start="-3rem" x-end="6rem"><img src="img/essays__angelbear.gif" alt="" /></pt-layer>
+        <pt-layer class="essays__staggering" col-start="phone:6 phone:7" col-end="phone:14 phone:13"><img class="essays__staggering__img" src="img/essays__staggering.jpg" alt="" /></pt-layer>
+        <pt-layer class="essays__piss" col-start="2" col-end="10" y-start="7rem" y-end="-7rem"><img class="essays__piss__img" src="img/essays__piss.jpg" alt="" /></pt-layer>
+        <pt-layer col-start="1" col-end="phone:12 phone:8" y-start="-6rem" y-end="3rem"><img src="img/essays__treerain.webp" alt="" /></pt-layer>
+
+        <pt-layer class="essays__star" col-start="11" col-end="13" y-start="-5rem" y-end="5rem" rotate-start="-1000deg" rotate-end="20deg" ease="ease"><img src="img/essays__star.jpg" alt="" /></pt-layer>
+
+        <pt-layer col-start="phone:2 phone:3" col-end="phone:13 phone:10">
+          <a href="https://roosterking.drewschorno.com" class="essays__roosterking">
+            <img class="essays__roosterking__img" src="img/roosterking.webp" alt="" />
+            <p class="essays__roosterking__link">Click here to see my award winning multimedia memoir masterpiece "Rooster King"</p>
+          </a>
+        </pt-layer>
+
+        <pt-layer class="essays__list" col-start="2" col-end="phone:13 phone:7">
+          <div class="essays__list__box">
+            <h3 class="essays__list__title">My Essays</h3>
+            <p>/////////////////////////////</p>
+            <p><a href="https://arcove.substack.com/p/kamikaze-dreaming">kamikaze dreaming:</a> an antiresume</p>
+            <p><a href="https://arcove.substack.com/p/six-masks">six masks:</a> a memoir of my time in clown school</p>
+            <p><a href="https://arcove.substack.com/p/units-of-breath">units of breath:</a> how do you measure your life</p>
+            <p><a href="https://arcove.substack.com/p/iron-lotus">iron lotus:</a> cats in jars as a metaphor for something to do with childhoods or whatever</p>
+            <p><a href="https://arcove.substack.com/p/null-call">null call:</a> advice for the vestigial shamans among us</p>
+            <p><a href="https://arcove.substack.com/p/four-songs">four songs:</a> meditations on maureen</p>
+            <p><a href="https://arcove.substack.com/p/generative-adversarial-relationships">generative adversarial relationships:</a> human creative systems through the lens of our AI counterparts</p>
+            <p><a href="https://arcove.substack.com/p/the-form-of-formats">the form of formats:</a> how to play a game that doesn't exist</p>
+          </div>
+        </pt-layer>
+      </pt-row>
+    </pt-group>
+
+    <pt-group class="section">
+      <pt-row flow stack-below="0px" row-gap="0px" class="grid section--songs">
+        <div class="songs__flowers"><img class="songs__flowers__img" src="img/songs__flowers.jpg" alt="" /></div>
+        <pt-layer class="songs__store" col-start="phone:6 phone:11" col-end="14" y-start="5rem" y-end="-5rem"><img class="songs__store__img" src="img/songs__store.jpg" alt="" /></pt-layer>
+
+        <pt-layer class="songs__title" col-start="2" col-end="phone:14 phone:11">
+          <h2>lofi beats for lying on the floor &amp; eating string cheese</h2>
+        </pt-layer>
+
+        <pt-layer class="songs__tracks" col-start="2" col-end="phone:13 phone:7">
+          <div class="songs__tracks__box">
+            <iframe title="SoundCloud track" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1187693716&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+            <iframe title="SoundCloud track" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/947681068&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+            <iframe title="SoundCloud track" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/666285821&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+          </div>
+        </pt-layer>
+
+        <pt-layer class="songs__roadloop" col-start="phone:2 phone:8" col-end="13">
+          <div class="songs__roadloop__box">
+            <img class="songs__roadloop__img" src="img/songs__roadloop.gif" alt="" />
+            <pt-anim class="songs__roadloop__text" rotate-start="-20deg" rotate-end="20deg"><p>hey im going to the store, do you want anything?</p></pt-anim>
+          </div>
+        </pt-layer>
+      </pt-row>
+    </pt-group>
+
+    <pt-group class="section">
+      <pt-row flow stack-below="0px" row-gap="0px" class="grid section--digital">
+        <div class="digital__glitch">
+          <pt-anim class="digital__glitch__img" y-start="-50%" y-end="50%" timeline="--pt-group"><img src="img/digital__glitch.jpg" alt="" /></pt-anim>
+        </div>
+        <pt-layer class="digital__touch" col-start="phone:3 phone:6" col-end="14" y-start="-2rem" y-end="7rem" timeline="--pt-group"><img class="digital__touch__img" src="img/digital__touch.jpg" alt="" /></pt-layer>
+
+        <pt-layer class="digital__smoke" col-start="1" col-end="phone:11 phone:10"><img class="digital__smoke__img" src="img/digital__smoke.gif" alt="" /></pt-layer>
+
+        <pt-layer class="digital__cowboy" col-start="2" col-end="phone:8 phone:5" y-start="5rem" y-end="-5rem"><img src="img/digital__cowboy.gif" alt="" /></pt-layer>
+        <pt-layer class="digital__text" col-start="phone:2 phone:4" col-end="phone:9 phone:6"><p>when the end of the world comes, you know where i'll be</p></pt-layer>
+      </pt-row>
+    </pt-group>
+
+    <pt-group class="section">
+      <pt-row flow stack-below="0px" row-gap="0px" class="grid section--gas">
+        <pt-layer class="gas__station" col-start="phone:3 phone:5" col-end="phone:14 phone:13" x-start="-2rem" x-end="0px" ease="ease" range="contain 0% cover 100%" extra="gas__fade ease both"><img class="gas__station__img" src="img/gas__station.jpg" alt="" /></pt-layer>
+        <pt-layer class="gas__text" col-start="2" col-end="phone:11 phone:7"><img src="img/gas__text-trim.png" alt="" /></pt-layer>
+      </pt-row>
+    </pt-group>
+
+    <pt-group class="section">
+      <pt-row flow stack-below="0px" row-gap="0px" class="grid section--ai">
+        <img class="ai__trash" src="img/ai__trash.jpg" alt="" />
+        <pt-layer class="ai__title" col-start="phone:2 phone:7" col-end="13" y-start="2rem" y-end="-2rem">
+          <div><span class="handwriting ai__title__text">i can’t wait for <span class="monospace ai__title__text__ai">ai</span> art to end design forever</span></div>
+        </pt-layer>
+        <pt-layer class="ai__1" col-start="2" col-end="phone:8 phone:4" y-start="3rem" y-end="-3rem"><img src="img/ai__1.jpeg" alt="" /></pt-layer>
+        <pt-layer class="ai__2" col-start="phone:6 phone:4" col-end="phone:13 phone:7" y-start="9rem" y-end="-9rem"><img src="img/ai__2.jpeg" alt="" /></pt-layer>
+        <pt-layer class="ai__3" col-start="phone:4 phone:3" col-end="phone:11 phone:6" y-start="6rem" y-end="-6rem"><img src="img/ai__3.jpeg" alt="" /></pt-layer>
+
+        <pt-layer class="ai__gay" col-start="11" col-end="13"><p>also i'm sorry that i'm gay</p></pt-layer>
+      </pt-row>
+    </pt-group>
+
+    <pt-group class="section">
+      <pt-row flow stack-below="0px" row-gap="0px" class="grid section--pitbull">
+        <pt-layer class="pitbull__text" col-start="phone:2 phone:6" col-end="phone:8 phone:10">
+          <p>hey did you know that i made an album cover for pitbull? cause i did, yeah. he’s a big celebrity if you didn’t know that. it’s not that big of a deal but some people think it’s kindof cool. yeah ha ha that was crazy...</p>
+        </pt-layer>
+
+        <pt-layer class="pitbull__wrap" col-start="phone:9 phone:11" col-end="14" y-start="-100%" scale-start="0.7" rotate-start="-360deg" ease="ease" timeline="--pt-group" range="entry-crossing 50% entry-crossing 100%">
+          <div class="pitbull__box">
+            <div class="pitbull__lady"></div>
+            <pt-anim opacity-start="0" opacity-end="1" timeline="--pt-group" range="entry-crossing 50% entry-crossing 100%"><img src="img/pitbull.jpg" alt="An album cover for Pitbull" /></pt-anim>
+          </div>
+        </pt-layer>
+      </pt-row>
+    </pt-group>
+
+    <script src="portamento/portamento.js"></script>
+    <script>
+      portamento.initScrollFallback();
+    </script>
+  </body>
 </html>

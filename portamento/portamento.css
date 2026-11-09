@@ -1,0 +1,889 @@
+/* portamento (CSS), built from commit 4d92a88: anim.css, layout.css and section.css in one file */
+
+/* ---- anim.css ---- */
+/* portamento: scroll-driven animation (.pt-anim). Docs: README.md. */
+
+@property --pt-x-start { syntax: "<length-percentage>"; inherits: false; initial-value: 0px; }
+@property --pt-x-end { syntax: "<length-percentage>"; inherits: false; initial-value: 0px; }
+@property --pt-y-start { syntax: "<length-percentage>"; inherits: false; initial-value: 0px; }
+@property --pt-y-end { syntax: "<length-percentage>"; inherits: false; initial-value: 0px; }
+@property --pt-scale-start { syntax: "<number>"; inherits: false; initial-value: 1; }
+@property --pt-scale-end { syntax: "<number>"; inherits: false; initial-value: 1; }
+@property --pt-rotate-start { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --pt-rotate-end { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --pt-skew-start { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --pt-skew-end { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+@property --pt-x-mid { syntax: "*"; inherits: false; }
+@property --pt-y-mid { syntax: "*"; inherits: false; }
+@property --pt-scale-mid { syntax: "*"; inherits: false; }
+@property --pt-rotate-mid { syntax: "*"; inherits: false; }
+@property --pt-skew-mid { syntax: "*"; inherits: false; }
+
+@property --pt-filter-start { syntax: "*"; inherits: false; }
+@property --pt-filter-end { syntax: "*"; inherits: false; }
+@property --pt-filter-mid { syntax: "*"; inherits: false; }
+
+@property --pt-opacity-start { syntax: "<number> | <percentage>"; inherits: false; initial-value: 1; }
+@property --pt-opacity-end { syntax: "<number> | <percentage>"; inherits: false; initial-value: 1; }
+@property --pt-opacity-mid { syntax: "*"; inherits: false; }
+
+@property --pt-parallax { syntax: "*"; inherits: false; }
+/* unset: the sentinel below; any real speed reads as "set" */
+@property --pt-section-parallax { syntax: "<number>"; inherits: false; initial-value: -9999; }
+
+@property --pt-range { syntax: "*"; inherits: false; }
+@property --pt-ease { syntax: "*"; inherits: false; }
+@property --pt-timeline { syntax: "*"; inherits: false; }
+@property --pt-transform-range { syntax: "*"; inherits: false; }
+@property --pt-transform-ease { syntax: "*"; inherits: false; }
+@property --pt-transform-timeline { syntax: "*"; inherits: false; }
+@property --pt-filter-range { syntax: "*"; inherits: false; }
+@property --pt-filter-ease { syntax: "*"; inherits: false; }
+@property --pt-filter-timeline { syntax: "*"; inherits: false; }
+@property --pt-opacity-range { syntax: "*"; inherits: false; }
+@property --pt-opacity-ease { syntax: "*"; inherits: false; }
+@property --pt-opacity-timeline { syntax: "*"; inherits: false; }
+@property --pt-parallax-timeline { syntax: "*"; inherits: false; }
+@property --pt-parallax-range { syntax: "*"; inherits: false; }
+@property --pt-in-range { syntax: "*"; inherits: false; }
+@property --pt-out-range { syntax: "*"; inherits: false; }
+@property --pt-in-ease { syntax: "*"; inherits: false; }
+@property --pt-out-ease { syntax: "*"; inherits: false; }
+@property --pt-composition { syntax: "*"; inherits: false; }
+@property --pt-transform-composition { syntax: "*"; inherits: false; }
+@property --pt-filter-composition { syntax: "*"; inherits: false; }
+@property --pt-parallax-composition { syntax: "*"; inherits: false; }
+
+@property --pt-extra { syntax: "*"; inherits: false; }
+@property --pt-extra-range { syntax: "*"; inherits: false; }
+@property --pt-extra-timeline { syntax: "*"; inherits: false; }
+@property --pt-extra-composition { syntax: "*"; inherits: false; }
+
+pt-anim {
+  display: block;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    :is(.pt-anim, pt-anim) {
+      --_pt-p: var(--_pt-pinned, 0);
+      --_pt-tl: var(--_pt-ctx-timeline, view());
+      /* section parallax: a pinned element moves as if in flow, at that speed,
+         across its section (the in-flow formula on the section's timeline) */
+      --_pt-sp: clamp(0, var(--pt-section-parallax, -9999) + 9999, 1);
+      --_pt-pp: calc(var(--_pt-p) * (1 - var(--_pt-sp)));
+      --_pt-s: calc(
+        var(--_pt-sp) * var(--pt-section-parallax, -9999) +
+          (1 - var(--_pt-sp)) * var(--pt-parallax, calc(1 - var(--_pt-p)))
+      );
+      --_pt-d: var(--pt-pin-distance, 1000lvh);
+      --_pt-te: var(--pt-transform-ease, var(--pt-ease, linear));
+      --_pt-fe: var(--pt-filter-ease, var(--pt-ease, linear));
+      --_pt-oe: var(--pt-opacity-ease, var(--pt-ease, linear));
+      --_pt-tr: var(--pt-transform-range, var(--pt-range, cover));
+      --_pt-fr: var(--pt-filter-range, var(--pt-range, cover));
+      --_pt-or: var(--pt-opacity-range, var(--pt-range, cover));
+      --_pt-tk: pt-transform;
+      /* filter and opacity only when used (below): any filter animation, even
+         none to none, gives the element a filter, and a thousand of those cost
+         a third of the frame rate */
+      --_pt-fk: none;
+      --_pt-ok: none;
+      /* second slot per channel: the out, in custom in/out mode */
+      --_pt-tk2: none;
+      --_pt-fk2: none;
+      --_pt-ok2: none;
+      --_pt-tmid: skew(var(--pt-skew-mid, calc((var(--pt-skew-start, 0deg) + var(--pt-skew-end, 0deg)) / 2)))
+        translateX(var(--pt-x-mid, calc((var(--pt-x-start, 0px) + var(--pt-x-end, 0px)) / 2)))
+        translateY(var(--pt-y-mid, calc((var(--pt-y-start, 0px) + var(--pt-y-end, 0px)) / 2)))
+        scale(var(--pt-scale-mid, calc((var(--pt-scale-start, 1) + var(--pt-scale-end, 1)) / 2)))
+        rotate(var(--pt-rotate-mid, calc((var(--pt-rotate-start, 0deg) + var(--pt-rotate-end, 0deg)) / 2)));
+
+      /* the fill mode before the name: "ease none both" would read none as
+         the fill mode and run an animation named "both". Parallax first:
+         after the others, Safari 27 locks up when a mid, an eased curve and
+         a narrowed range meet on an element in view at load. */
+      animation:
+        linear both pt-parallax,
+        var(--_pt-te) both var(--_pt-tk),
+        var(--pt-out-ease, var(--pt-transform-ease, var(--pt-ease, linear))) forwards var(--_pt-tk2),
+        var(--_pt-fe) both var(--_pt-fk),
+        var(--pt-out-ease, var(--pt-filter-ease, var(--pt-ease, linear))) forwards var(--_pt-fk2),
+        var(--_pt-oe) both var(--_pt-ok),
+        var(--pt-out-ease, var(--pt-opacity-ease, var(--pt-ease, linear))) forwards var(--_pt-ok2),
+        var(--pt-extra, none);
+
+      animation-range:
+        var(
+          --pt-parallax-range,
+          cover 0% cover
+            calc(var(--_pt-pp) * var(--_pt-d) + (1 - var(--_pt-pp)) * 100%)
+        ),
+        var(--_pt-tr),
+        var(--pt-out-range, exit),
+        var(--_pt-fr),
+        var(--pt-out-range, exit),
+        var(--_pt-or),
+        var(--pt-out-range, exit),
+        var(--pt-extra-range, var(--pt-range, cover));
+
+      animation-timeline:
+        var(--pt-parallax-timeline, var(--pt-timeline, var(--_pt-tl))),
+        var(--pt-transform-timeline, var(--pt-timeline, var(--_pt-tl))),
+        var(--pt-transform-timeline, var(--pt-timeline, var(--_pt-tl))),
+        var(--pt-filter-timeline, var(--pt-timeline, var(--_pt-tl))),
+        var(--pt-filter-timeline, var(--pt-timeline, var(--_pt-tl))),
+        var(--pt-opacity-timeline, var(--pt-timeline, var(--_pt-tl))),
+        var(--pt-opacity-timeline, var(--pt-timeline, var(--_pt-tl))),
+        var(--pt-extra-timeline, var(--pt-timeline, var(--_pt-tl)));
+
+      animation-composition:
+        var(--pt-parallax-composition, var(--pt-composition, replace)),
+        var(--pt-transform-composition, var(--pt-composition, replace)),
+        var(--pt-transform-composition, var(--pt-composition, replace)),
+        var(--pt-filter-composition, var(--pt-composition, replace)),
+        var(--pt-filter-composition, var(--pt-composition, replace)),
+        add,
+        add,
+        var(--pt-extra-composition, replace);
+    }
+
+    :is(.pt-anim, pt-anim):is(.pt-anim--filter, [style*="--pt-filter-"]) {
+      --_pt-fk: pt-filter;
+    }
+    :is(.pt-anim, pt-anim):is(.pt-anim--opacity, [style*="--pt-opacity-"]) {
+      --_pt-ok: pt-opacity;
+    }
+
+    :is(.pt-anim, pt-anim):is(
+        .pt-anim--transform-mid,
+        [style*="--pt-x-mid"],
+        [style*="--pt-y-mid"],
+        [style*="--pt-scale-mid"],
+        [style*="--pt-rotate-mid"],
+        [style*="--pt-skew-mid"]
+      ) {
+      --_pt-tk: pt-transform-mid;
+    }
+    :is(.pt-anim, pt-anim):is(.pt-anim--filter-mid, [style*="--pt-filter-mid"]) {
+      --_pt-fk: pt-filter-mid;
+    }
+    :is(.pt-anim, pt-anim):is(.pt-anim--opacity-mid, [style*="--pt-opacity-mid"]) {
+      --_pt-ok: pt-opacity-mid;
+    }
+
+    :is(.pt-anim, pt-anim):is(
+        .pt-anim--transform-mid,
+        [style*="--pt-x-mid"],
+        [style*="--pt-y-mid"],
+        [style*="--pt-scale-mid"],
+        [style*="--pt-rotate-mid"],
+        [style*="--pt-skew-mid"]
+      ):is(
+        .pt-anim--in-out,
+        [style*="--pt-in-range"],
+        [style*="--pt-out-range"],
+        [style*="--pt-in-ease"],
+        [style*="--pt-out-ease"]
+      ) {
+      --_pt-tk: pt-transform-in;
+      --_pt-tk2: pt-transform-out;
+      --_pt-tr: var(--pt-in-range, entry);
+      --_pt-te: var(--pt-in-ease, var(--pt-transform-ease, var(--pt-ease, linear)));
+    }
+    :is(.pt-anim, pt-anim):is(.pt-anim--filter-mid, [style*="--pt-filter-mid"]):is(
+        .pt-anim--in-out,
+        [style*="--pt-in-range"],
+        [style*="--pt-out-range"],
+        [style*="--pt-in-ease"],
+        [style*="--pt-out-ease"]
+      ) {
+      --_pt-fk: pt-filter-in;
+      --_pt-fk2: pt-filter-out;
+      --_pt-fr: var(--pt-in-range, entry);
+      --_pt-fe: var(--pt-in-ease, var(--pt-filter-ease, var(--pt-ease, linear)));
+    }
+    :is(.pt-anim, pt-anim):is(.pt-anim--opacity-mid, [style*="--pt-opacity-mid"]):is(
+        .pt-anim--in-out,
+        [style*="--pt-in-range"],
+        [style*="--pt-out-range"],
+        [style*="--pt-in-ease"],
+        [style*="--pt-out-ease"]
+      ) {
+      --_pt-ok: pt-opacity-in;
+      --_pt-ok2: pt-opacity-out;
+      --_pt-or: var(--pt-in-range, entry);
+      --_pt-oe: var(--pt-in-ease, var(--pt-opacity-ease, var(--pt-ease, linear)));
+    }
+  }
+}
+
+@keyframes pt-transform {
+  from {
+    transform: skew(var(--pt-skew-start, 0deg)) translateX(var(--pt-x-start, 0px))
+      translateY(var(--pt-y-start, 0px)) scale(var(--pt-scale-start, 1))
+      rotate(var(--pt-rotate-start, 0deg));
+  }
+  to {
+    transform: skew(var(--pt-skew-end, 0deg)) translateX(var(--pt-x-end, 0px))
+      translateY(var(--pt-y-end, 0px)) scale(var(--pt-scale-end, 1))
+      rotate(var(--pt-rotate-end, 0deg));
+  }
+}
+
+@keyframes pt-transform-mid {
+  entry 0% {
+    transform: skew(var(--pt-skew-start, 0deg)) translateX(var(--pt-x-start, 0px))
+      translateY(var(--pt-y-start, 0px)) scale(var(--pt-scale-start, 1))
+      rotate(var(--pt-rotate-start, 0deg));
+  }
+  entry 100%,
+  exit 0% {
+    transform: var(--_pt-tmid);
+  }
+  exit 100% {
+    transform: skew(var(--pt-skew-end, 0deg)) translateX(var(--pt-x-end, 0px))
+      translateY(var(--pt-y-end, 0px)) scale(var(--pt-scale-end, 1))
+      rotate(var(--pt-rotate-end, 0deg));
+  }
+}
+
+@keyframes pt-transform-in {
+  from {
+    transform: skew(var(--pt-skew-start, 0deg)) translateX(var(--pt-x-start, 0px))
+      translateY(var(--pt-y-start, 0px)) scale(var(--pt-scale-start, 1))
+      rotate(var(--pt-rotate-start, 0deg));
+  }
+  to {
+    transform: var(--_pt-tmid);
+  }
+}
+@keyframes pt-transform-out {
+  from {
+    transform: var(--_pt-tmid);
+  }
+  to {
+    transform: skew(var(--pt-skew-end, 0deg)) translateX(var(--pt-x-end, 0px))
+      translateY(var(--pt-y-end, 0px)) scale(var(--pt-scale-end, 1))
+      rotate(var(--pt-rotate-end, 0deg));
+  }
+}
+
+@keyframes pt-filter {
+  from {
+    filter: var(--pt-filter-start, none);
+  }
+  to {
+    filter: var(--pt-filter-end, none);
+  }
+}
+
+@keyframes pt-filter-mid {
+  entry 0% {
+    filter: var(--pt-filter-start, none);
+  }
+  entry 100%,
+  exit 0% {
+    filter: var(--pt-filter-mid, none);
+  }
+  exit 100% {
+    filter: var(--pt-filter-end, none);
+  }
+}
+
+@keyframes pt-filter-in {
+  from {
+    filter: var(--pt-filter-start, none);
+  }
+  to {
+    filter: var(--pt-filter-mid, none);
+  }
+}
+@keyframes pt-filter-out {
+  from {
+    filter: var(--pt-filter-mid, none);
+  }
+  to {
+    filter: var(--pt-filter-end, none);
+  }
+}
+
+@keyframes pt-opacity {
+  from {
+    filter: opacity(var(--pt-opacity-start, 1));
+  }
+  to {
+    filter: opacity(var(--pt-opacity-end, 1));
+  }
+}
+
+@keyframes pt-opacity-mid {
+  entry 0% {
+    filter: opacity(var(--pt-opacity-start, 1));
+  }
+  entry 100%,
+  exit 0% {
+    filter: opacity(var(--pt-opacity-mid, 1));
+  }
+  exit 100% {
+    filter: opacity(var(--pt-opacity-end, 1));
+  }
+}
+
+@keyframes pt-opacity-in {
+  from {
+    filter: opacity(var(--pt-opacity-start, 1));
+  }
+  to {
+    filter: opacity(var(--pt-opacity-mid, 1));
+  }
+}
+/* the in holds the mid, so the out runs as a fraction of it */
+@keyframes pt-opacity-out {
+  from {
+    filter: opacity(1);
+  }
+  to {
+    filter: opacity(calc(var(--pt-opacity-end, 1) / var(--pt-opacity-mid, 1)));
+  }
+}
+
+/* in flow and pinned formulas, blended by --_pt-pp (README: How it works) */
+@keyframes pt-parallax {
+  from {
+    translate: 0
+      calc(
+        (1 - var(--_pt-pp)) * 100lvh * (var(--_pt-s) - 1) +
+          var(--_pt-pp) * var(--_pt-s) * 100dvh
+      );
+  }
+  to {
+    translate: 0
+      calc(
+        (1 - var(--_pt-pp)) * -100lvh * (var(--_pt-s) - 1) +
+          var(--_pt-pp) * var(--_pt-s) * (100dvh - var(--_pt-d))
+      );
+  }
+}
+
+/* ---- layout.css ---- */
+/* portamento: layers, rows, fluid layouts, overlap, pinning, blend modes. Docs: README.md. */
+
+@property --pt-col-start { syntax: "<number>"; inherits: false; initial-value: 1; }
+@property --pt-col-end { syntax: "<number>"; inherits: false; initial-value: 14; }
+@property --pt-align-x { syntax: "<number>"; inherits: false; initial-value: 0.5; }
+@property --pt-align-y { syntax: "<number>"; inherits: false; initial-value: 0.5; }
+@property --pt-translate-x { syntax: "*"; inherits: false; }
+@property --pt-translate-y { syntax: "*"; inherits: false; }
+@property --pt-rotate { syntax: "*"; inherits: false; }
+@property --pt-scale { syntax: "*"; inherits: false; }
+@property --pt-bleed { syntax: "<number>"; inherits: false; initial-value: 0; }
+/* The window width in px for tan(atan2()): Chrome before (at least) 133 gets
+   atan2() wrong with vw in it, so width maps and these rules compare px only */
+@property --_pt-vw { syntax: "<length>"; inherits: true; initial-value: 0px; }
+:root {
+  --_pt-vw: 100vw;
+}
+
+.pt-layer,
+pt-layer {
+  --_pt-x: var(--pt-align-x, 0.5);
+  --_pt-y: var(--pt-align-y, 0.5);
+  --_pt-cs: var(--pt-col-start, 1);
+  --_pt-ce: var(--pt-col-end, 14);
+
+  --_pt-body: var(--pt-body-width, min(50rem, 100vw));
+  --_pt-gap: var(--pt-col-gap, min(1rem, 3.5vw));
+  --_pt-gutter: calc((100vw - var(--_pt-body)) / 2);
+  --_pt-colw: calc((var(--_pt-body) - var(--_pt-gap) * 13) / 12);
+
+  --_pt-cs-clean: clamp(1, var(--_pt-cs), 14);
+  --_pt-ce-clean: clamp(1, calc(15 - var(--_pt-ce)), 14);
+
+  display: flex;
+  flex-direction: column;
+  margin-block: auto;
+  margin-left: calc(
+    var(--_pt-gutter) *
+      (min(var(--_pt-cs-clean) - 1, 1) + clamp(0, var(--_pt-cs-clean) - 14, 1)) +
+      var(--_pt-colw) * max(var(--_pt-cs-clean) - 2, 0) +
+      var(--_pt-gap) * (var(--_pt-cs-clean) - 1)
+  );
+  margin-right: calc(
+    var(--_pt-gutter) *
+      (min(var(--_pt-ce-clean) - 1, 1) + clamp(0, var(--_pt-ce-clean) - 14, 1)) +
+      var(--_pt-colw) * max(var(--_pt-ce-clean) - 2, 0) +
+      var(--_pt-gap) * (var(--_pt-ce-clean) - 1)
+  );
+}
+
+/* only when set: each makes a stacking context and a containing block */
+:is(.pt-layer, pt-layer):is([style*="--pt-translate-x"], [style*="--pt-translate-y"]) {
+  translate: var(--pt-translate-x, 0px) var(--pt-translate-y, 0px);
+}
+:is(.pt-layer, pt-layer)[style*="--pt-rotate:"] {
+  rotate: var(--pt-rotate);
+}
+:is(.pt-layer, pt-layer)[style*="--pt-scale:"] {
+  scale: var(--pt-scale);
+}
+
+/* Full width below a width: with --pt-full-width-below set on any ancestor,
+   layers span the whole width (tracks 1 to 14) below it, unless their columns
+   have a width map of their own. Rows' own narrow-screen rules come later.
+   Without tan() (before Chrome 111) the flag would be invalid and take every
+   layer's columns with it, so there initScrollFallback() sets
+   data-pt-full-width instead. */
+@supports (width: calc(1px * tan(atan2(1px, 1px)))) {
+  :is(.pt-layer, pt-layer):not(.pt-fluid, [style*="--pt-fluid:"], [style*="--_pt-fluid-cols"]) {
+    --_pt-fw: clamp(0, tan(atan2(var(--pt-full-width-below, 0px) - var(--_pt-vw, 100vw), 1px)) * 1e5, 1);
+    --_pt-cs: calc(var(--pt-col-start, 1) * (1 - var(--_pt-fw)) + var(--_pt-fw));
+    --_pt-ce: calc(var(--pt-col-end, 14) * (1 - var(--_pt-fw)) + 14 * var(--_pt-fw));
+  }
+}
+:is(.pt-layer, pt-layer)[data-pt-full-width]:not(.pt-fluid, [style*="--pt-fluid:"], [style*="--_pt-fluid-cols"]) {
+  --_pt-cs: 1;
+  --_pt-ce: 14;
+}
+
+/* Without @property (Safari before 16.4, Firefox before 128) the options
+   inherit, so a layer inside another's content would take its columns. */
+.pt-layer__inner {
+  --pt-col-start: initial;
+  --pt-col-end: initial;
+  --pt-align-x: initial;
+  --pt-align-y: initial;
+}
+
+/* whole grid lines; round() is missing before Chrome 125 */
+@supports (width: round(1px, 1px)) {
+  .pt-layer,
+  pt-layer {
+    --_pt-cs-clean: clamp(1, round(var(--_pt-cs)), 14);
+    --_pt-ce-clean: clamp(1, calc(15 - round(var(--_pt-ce))), 14);
+  }
+}
+
+.pt-layer::before,
+.pt-layer::after,
+pt-layer::before,
+pt-layer::after,
+.pt-layer__inner::before,
+.pt-layer__inner::after {
+  content: "";
+  flex-shrink: 1;
+  flex-basis: 0px;
+}
+.pt-layer::before,
+pt-layer::before {
+  flex-grow: var(--_pt-y);
+}
+.pt-layer::after,
+pt-layer::after {
+  flex-grow: calc(1 - var(--_pt-y));
+}
+
+.pt-layer__inner {
+  display: flex;
+  flex: none;
+}
+.pt-layer__inner::before {
+  flex-grow: var(--_pt-x);
+}
+.pt-layer__inner::after {
+  flex-grow: calc(1 - var(--_pt-x));
+}
+.pt-layer__inner > * {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+/* Several children stack like normal content: the wrapper becomes a block as
+   wide as the widest of them, placed by align-x the way bleed places it. */
+.pt-layer__inner:has(> :nth-child(2)) {
+  display: flow-root;
+  width: fit-content;
+  max-width: 100%;
+  position: relative;
+  left: calc(var(--_pt-x) * 100%);
+  translate: calc(var(--_pt-x) * -100%) 0;
+}
+.pt-layer__inner:has(> :nth-child(2))::before,
+.pt-layer__inner:has(> :nth-child(2))::after {
+  display: none;
+}
+
+/* Fill: the content gets the layer's full height (children stretch, and
+   height: 100% works), e.g. an image covering an overlap layer. */
+:is(.pt-layer--fill, pt-layer[fill])::before,
+:is(.pt-layer--fill, pt-layer[fill])::after {
+  display: none;
+}
+:is(.pt-layer--fill, pt-layer[fill]) > .pt-layer__inner {
+  flex: 1 1 auto;
+  min-height: 0; /* or an image's natural height would stretch it past the layer */
+}
+
+/* Bleed: the content keeps its own width, even past the layer's, and
+   align-x places it by the leftover space, negative or not (left: x of the
+   layer, translate: back x of itself), so align-x 1 pins its right edge to
+   the layer's and the rest hangs out to the left. Always on with the class
+   or a bare attribute; by width with --pt-bleed (1 or 0, e.g. a width map). */
+:is(.pt-layer--bleed, pt-layer[bleed=""]) > .pt-layer__inner {
+  width: max-content;
+  position: relative;
+  left: calc(var(--_pt-x) * 100%);
+  translate: calc(var(--_pt-x) * -100%) 0;
+}
+:is(.pt-layer--bleed, pt-layer[bleed=""]) > .pt-layer__inner > * {
+  flex-shrink: 0;
+}
+@container style(--pt-bleed: 1) {
+  .pt-layer__inner {
+    width: max-content;
+    position: relative;
+    left: calc(var(--_pt-x) * 100%);
+    translate: calc(var(--_pt-x) * -100%) 0;
+  }
+}
+
+/* Custom elements only take their attributes once elements.js defines them,
+   so until then they'd paint in the wrong place and jump; keep the outermost
+   ones hidden (but laid out), fade them in once defined, and show them anyway
+   after 3s if the script never runs. */
+:is(pt-section, pt-group, pt-row, pt-layer, pt-anim):not(:defined):not(:is(pt-section, pt-group, pt-row, pt-layer, pt-anim) *) {
+  opacity: 0;
+  animation: pt-reveal 0s 3s forwards;
+}
+@keyframes pt-reveal {
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-pt-revealing] :is(pt-section, pt-group, pt-row, pt-layer, pt-anim):not(:is(pt-section, pt-group, pt-row, pt-layer, pt-anim) *) {
+    transition: opacity var(--pt-reveal-duration, 0.6s) ease-out;
+  }
+  @starting-style {
+    [data-pt-revealing] :is(pt-section, pt-group, pt-row, pt-layer, pt-anim):not(:is(pt-section, pt-group, pt-row, pt-layer, pt-anim) *) {
+      opacity: 0;
+    }
+  }
+}
+
+@property --pt-row-gap { syntax: "*"; inherits: false; }
+
+.pt-row,
+pt-row {
+  --_pt-body: var(--pt-body-width, min(50rem, 100vw));
+  --_pt-gap: var(--pt-col-gap, min(1rem, 3.5vw));
+  --_pt-colw: calc((var(--_pt-body) - var(--_pt-gap) * 13) / 12);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) repeat(12, var(--_pt-colw)) minmax(0, 1fr);
+  column-gap: var(--_pt-gap);
+  row-gap: var(--pt-row-gap, 2rem);
+  position: relative;
+  overflow-x: clip;
+  min-width: 0;
+  /* 1 below --pt-stack-below (default: the 900px media query, which includes 900) */
+  --_pt-stacked: clamp(0, tan(atan2(var(--pt-stack-below, 900.02px) - var(--_pt-vw, 100vw), 1px)) * 1e5, 1);
+}
+:is(.pt-row, pt-row) > * {
+  --_pt-cs: var(--pt-col-start, 1);
+  --_pt-ce: var(--pt-col-end, 14);
+  grid-column: var(--_pt-cs) / calc(var(--_pt-ce) + 1);
+  grid-row: 1;
+  min-width: 0;
+}
+@supports (width: round(1px, 1px)) {
+  :is(.pt-row, pt-row) > * {
+    grid-column: round(var(--_pt-cs)) / round(var(--_pt-ce) + 1);
+  }
+}
+/* a grid item needs none of a layer's column margins; as specific as the
+   layer's own rule (one class), so a page's margins on it still apply */
+:where(.pt-row, pt-row) > :is(.pt-layer, pt-layer):not(:where(.pt-layer--pinned, [pinned])) {
+  margin: 0;
+}
+@media (max-width: 900px) {
+  :is(.pt-row, pt-row) > * {
+    grid-row: auto;
+  }
+  :is(.pt-row, pt-row) > :not(.pt-fluid, [style*="--pt-fluid:"], [style*="--_pt-fluid-cols"]) {
+    --_pt-cs: min(var(--pt-col-start, 1), 2);
+    --_pt-ce: max(var(--pt-col-end, 14), 13);
+  }
+}
+/* a row's own stack width overrides the media query either way */
+@container style(--_pt-stacked: 1) {
+  :is(.pt-row, pt-row) > * {
+    grid-row: auto;
+  }
+  :is(.pt-row, pt-row) > :not(.pt-fluid, [style*="--pt-fluid:"], [style*="--_pt-fluid-cols"]) {
+    --_pt-cs: min(var(--pt-col-start, 1), 2);
+    --_pt-ce: max(var(--pt-col-end, 14), 13);
+  }
+}
+@container style(--_pt-stacked: 0) {
+  :is(.pt-row, pt-row) > * {
+    grid-row: 1;
+  }
+  :is(.pt-row, pt-row) > :not(.pt-fluid, [style*="--pt-fluid:"], [style*="--_pt-fluid-cols"]) {
+    --_pt-cs: var(--pt-col-start, 1);
+    --_pt-ce: var(--pt-col-end, 14);
+  }
+}
+:is(.pt-row, pt-row)[data-pt-stacked] > * {
+  grid-row: auto;
+}
+:is(.pt-row, pt-row)[data-pt-stacked] > :not(.pt-fluid, [style*="--pt-fluid:"], [style*="--_pt-fluid-cols"]) {
+  --_pt-cs: min(var(--pt-col-start, 1), 2);
+  --_pt-ce: max(var(--pt-col-end, 14), 13);
+}
+:is(.pt-row, pt-row)[data-pt-unstacked] > * {
+  grid-row: 1;
+}
+:is(.pt-row, pt-row)[data-pt-unstacked] > :not(.pt-fluid, [style*="--pt-fluid:"], [style*="--_pt-fluid-cols"]) {
+  --_pt-cs: var(--pt-col-start, 1);
+  --_pt-ce: var(--pt-col-end, 14);
+}
+/* flow: children place themselves like plain grid items, each on the first
+   row at or after the one before where its columns are free, rather than
+   all sharing one row; --pt-row-gap spaces those rows */
+:is(.pt-row, pt-row):is(.pt-row--flow, [flow]) > * {
+  grid-row: auto;
+}
+
+@property --pt-fluid { syntax: "*"; inherits: false; }
+@property --pt-fluid-from { syntax: "<length>"; inherits: false; initial-value: 375px; }
+@property --pt-fluid-to { syntax: "<length>"; inherits: false; initial-value: 1536px; }
+
+:is(.pt-fluid, [style*="--pt-fluid:"]) {
+  animation: var(--pt-fluid, none) 1s linear both paused;
+  animation-timeline: auto;
+  /* the viewport width picks the point in the paused animation */
+  animation-delay: calc(
+    -1s *
+      clamp(
+        0,
+        tan(atan2(var(--_pt-vw, 100vw) - var(--pt-fluid-from, 375px), var(--pt-fluid-to, 1536px) - var(--pt-fluid-from, 375px))),
+        1
+      )
+  );
+}
+
+.pt-layer--overlap,
+pt-layer[overlap] {
+  position: absolute;
+  inset: 0;
+}
+
+@property --pt-stack-below { syntax: "*"; inherits: false; }
+@property --_pt-stacked { syntax: "<number>"; inherits: false; initial-value: 0; }
+
+:is(.pt-group, .pt-section, pt-group, pt-section) {
+  /* 1 below --pt-stack-below; tan(atan2(a, b)) is a / b as a number */
+  --_pt-stacked: clamp(0, tan(atan2(var(--pt-stack-below, 0px) - var(--_pt-vw, 100vw), 1px)) * 1e5, 1);
+}
+@container style(--_pt-stacked: 1) {
+  :is(.pt-group, .pt-section, pt-group, pt-section)
+    > :is(.pt-layer--overlap, pt-layer[overlap]) {
+    position: relative;
+    inset: auto;
+  }
+}
+:is(.pt-group, .pt-section, pt-group, pt-section)[data-pt-stacked]
+  > :is(.pt-layer--overlap, pt-layer[overlap]) {
+  position: relative;
+  inset: auto;
+}
+
+.pt-layer--pinned,
+pt-layer[pinned] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100lvh;
+  pointer-events: none;
+  opacity: var(--pt-in-view, 1);
+  --_pt-pinned: 1;
+  --_pt-ctx-timeline: --pt-group;
+}
+
+.pt-blend-multiply { mix-blend-mode: multiply; }
+.pt-blend-screen { mix-blend-mode: screen; }
+.pt-blend-overlay { mix-blend-mode: overlay; }
+.pt-blend-darken { mix-blend-mode: darken; }
+.pt-blend-lighten { mix-blend-mode: lighten; }
+.pt-blend-color-dodge { mix-blend-mode: color-dodge; }
+.pt-blend-color-burn { mix-blend-mode: color-burn; }
+.pt-blend-hard-light { mix-blend-mode: hard-light; }
+.pt-blend-soft-light { mix-blend-mode: soft-light; }
+.pt-blend-difference { mix-blend-mode: difference; }
+.pt-blend-exclusion { mix-blend-mode: exclusion; }
+.pt-blend-hue { mix-blend-mode: hue; }
+.pt-blend-saturation { mix-blend-mode: saturation; }
+.pt-blend-color { mix-blend-mode: color; }
+.pt-blend-luminosity { mix-blend-mode: luminosity; }
+.pt-blend-plus-lighter { mix-blend-mode: plus-lighter; }
+
+/* ---- section.css ---- */
+/* portamento: groups, sections and their in-view fades. Docs: README.md. */
+
+@property --pt-in-view { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --_pt-enter { syntax: "<number>"; inherits: false; initial-value: 0; }
+@property --_pt-leave { syntax: "<number>"; inherits: false; initial-value: 0; }
+@property --_pt-on { syntax: "<number>"; inherits: true; initial-value: 0; }
+/* a nested section uses its own defaults, not its parent's; fade duration inherits on purpose */
+@property --pt-trigger-inset { syntax: "*"; inherits: false; }
+@property --pt-trigger-inset-top { syntax: "*"; inherits: false; }
+@property --pt-trigger-inset-bottom { syntax: "*"; inherits: false; }
+@property --pt-fade-distance { syntax: "*"; inherits: false; }
+/* progress: 0 to 1 while a section or group crosses the screen, and down the page */
+@property --pt-progress { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --pt-page-progress { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --_pt-prog { syntax: "*"; inherits: false; initial-value: none; }
+
+.pt-group,
+.pt-section,
+pt-group,
+pt-section {
+  display: block;
+  position: relative;
+  view-timeline: --pt-group block;
+  /* translated and bleeding layers can hang off the screen without widening
+     the page (clip, unlike hidden, doesn't make a scroll container, so it
+     also doesn't stop a grid or flex parent sizing this to its content:
+     hence min-width) */
+  overflow-x: clip;
+  min-width: 0;
+}
+
+.pt-section,
+pt-section {
+  --_pt-inset: var(--pt-trigger-inset, 50dvh);
+  /* entering is measured from the bottom of the screen, leaving from the top */
+  --_pt-inset-top: var(--pt-trigger-inset-top, var(--_pt-inset));
+  --_pt-inset-bottom: var(--pt-trigger-inset-bottom, var(--_pt-inset));
+}
+
+.pt-fade,
+:is(pt-layer, pt-group, pt-section, pt-row, pt-anim)[fade] {
+  opacity: var(--pt-in-view, 1);
+}
+
+@supports (animation-timeline: view()) {
+  :is(.pt-section, pt-section):not(.pt-section--timed, [timed]) {
+    --_pt-half-fade: calc(var(--pt-fade-distance, 15dvh) / 2);
+    --pt-in-view: calc(var(--_pt-enter, 0) - var(--_pt-leave, 0));
+
+    animation:
+      linear pt-enter both,
+      linear pt-leave both,
+      linear var(--_pt-prog, none) both;
+    animation-timeline: view(), view(), view();
+    animation-range:
+      cover calc(var(--_pt-inset-bottom) - var(--_pt-half-fade))
+        cover calc(var(--_pt-inset-bottom) + var(--_pt-half-fade)),
+      cover calc(100% - var(--_pt-inset-top) - var(--_pt-half-fade))
+        cover calc(100% - var(--_pt-inset-top) + var(--_pt-half-fade)),
+      cover;
+  }
+
+  :is(.pt-section--timed, pt-section[timed]) {
+    /* off unless its own animation says on, never inherited from an outer section */
+    --_pt-on: 0;
+    animation-name: pt-on, var(--_pt-prog, none);
+    animation-timing-function: linear;
+    animation-fill-mode: none, both;
+    animation-timeline: view(), view();
+    animation-range:
+      cover var(--_pt-inset-bottom) cover calc(100% - var(--_pt-inset-top)),
+      cover;
+  }
+
+  /* opt in: an inherited value that changes every frame restyles everything inside */
+  :is(.pt-section, pt-section):is(.pt-progress, [progress]) {
+    --_pt-prog: pt-progress;
+  }
+  :is(.pt-group, pt-group):is(.pt-progress, [progress]) {
+    animation: linear pt-progress both;
+    animation-timeline: view();
+    animation-range: cover;
+  }
+  .pt-page-progress {
+    animation: linear pt-page-progress both;
+    animation-timeline: scroll(root);
+  }
+
+  /* set by a style query, not an animation, so the transition fires */
+  @container style(--_pt-on: 1) {
+    :is(.pt-section--timed, pt-section[timed]) > * {
+      --pt-in-view: 1;
+    }
+  }
+  @container style(--_pt-on: 0) {
+    :is(.pt-section--timed, pt-section[timed]) > * {
+      --pt-in-view: 0;
+    }
+  }
+}
+
+:is(.pt-section--timed, pt-section[timed])
+  :is(.pt-layer--pinned, pt-layer[pinned], .pt-fade, [fade]) {
+  transition: opacity var(--pt-fade-duration, 1s);
+}
+
+@keyframes pt-enter {
+  from {
+    --_pt-enter: 0;
+  }
+  to {
+    --_pt-enter: 1;
+  }
+}
+
+@keyframes pt-leave {
+  from {
+    --_pt-leave: 0;
+  }
+  to {
+    --_pt-leave: 1;
+  }
+}
+
+@keyframes pt-on {
+  from,
+  to {
+    --_pt-on: 1;
+  }
+}
+
+:is(.pt-section, pt-section)[data-pt-in-view="false"] {
+  --pt-in-view: 0;
+}
+
+@supports not (animation-timeline: view()) {
+  :is(.pt-layer--pinned, pt-layer[pinned], .pt-fade, [fade]) {
+    transition: opacity var(--pt-fade-duration, 1s);
+  }
+}
+
+@keyframes pt-progress {
+  from {
+    --pt-progress: 0;
+  }
+  to {
+    --pt-progress: 1;
+  }
+}
+
+@keyframes pt-page-progress {
+  from {
+    --pt-page-progress: 0;
+  }
+  to {
+    --pt-page-progress: 1;
+  }
+}
