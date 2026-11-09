@@ -1,6 +1,5 @@
-/* portamento (CSS), built from commit 4d92a88: anim.css, layout.css and section.css in one file */
+/* portamento 0.1.0 */
 
-/* ---- anim.css ---- */
 /* portamento: scroll-driven animation (.pt-anim). Docs: README.md. */
 
 @property --pt-x-start { syntax: "<length-percentage>"; inherits: false; initial-value: 0px; }
@@ -84,12 +83,13 @@ pt-anim {
       --_pt-tr: var(--pt-transform-range, var(--pt-range, cover));
       --_pt-fr: var(--pt-filter-range, var(--pt-range, cover));
       --_pt-or: var(--pt-opacity-range, var(--pt-range, cover));
-      --_pt-tk: pt-transform;
-      /* filter and opacity only when used (below): any filter animation, even
-         none to none, gives the element a filter, and a thousand of those cost
-         a third of the frame rate */
+      /* each channel runs only when used (below): an animation from nothing
+         to nothing still costs a frame-by-frame update, and a filter one costs
+         a filter, which across a thousand elements is a third of the frame rate */
+      --_pt-tk: none;
       --_pt-fk: none;
       --_pt-ok: none;
+      --_pt-pk: none;
       /* second slot per channel: the out, in custom in/out mode */
       --_pt-tk2: none;
       --_pt-fk2: none;
@@ -105,7 +105,7 @@ pt-anim {
          after the others, Safari 27 locks up when a mid, an eased curve and
          a narrowed range meet on an element in view at load. */
       animation:
-        linear both pt-parallax,
+        linear both var(--_pt-pk),
         var(--_pt-te) both var(--_pt-tk),
         var(--pt-out-ease, var(--pt-transform-ease, var(--pt-ease, linear))) forwards var(--_pt-tk2),
         var(--_pt-fe) both var(--_pt-fk),
@@ -149,6 +149,20 @@ pt-anim {
         var(--pt-extra-composition, replace);
     }
 
+    :is(.pt-anim, pt-anim):is(
+        .pt-anim--transform,
+        [style*="--pt-x-"],
+        [style*="--pt-y-"],
+        [style*="--pt-scale-"],
+        [style*="--pt-rotate-"],
+        [style*="--pt-skew-"],
+        [style*="--pt-transform-"]
+      ) {
+      --_pt-tk: pt-transform;
+    }
+    :is(.pt-anim, pt-anim):is(.pt-anim--parallax, [style*="--pt-parallax"], [style*="--pt-section-parallax"]) {
+      --_pt-pk: pt-parallax;
+    }
     :is(.pt-anim, pt-anim):is(.pt-anim--filter, [style*="--pt-filter-"]) {
       --_pt-fk: pt-filter;
     }
@@ -367,7 +381,6 @@ pt-anim {
   }
 }
 
-/* ---- layout.css ---- */
 /* portamento: layers, rows, fluid layouts, overlap, pinning, blend modes. Docs: README.md. */
 
 @property --pt-col-start { syntax: "<number>"; inherits: false; initial-value: 1; }
@@ -728,7 +741,6 @@ pt-layer[pinned] {
 .pt-blend-luminosity { mix-blend-mode: luminosity; }
 .pt-blend-plus-lighter { mix-blend-mode: plus-lighter; }
 
-/* ---- section.css ---- */
 /* portamento: groups, sections and their in-view fades. Docs: README.md. */
 
 @property --pt-in-view { syntax: "<number>"; inherits: true; initial-value: 1; }
