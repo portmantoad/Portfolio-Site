@@ -96,19 +96,19 @@
       a:hover{ animation: starcursor 800ms step-end infinite;  }
 
       /*
-       * The grid: the original's columns were (100vw - 50rem) / 2 at each
-       * side and twelve equal ones between, in a section at most 60rem wide.
-       * That's portamento's 14-track row with the body as the section's
-       * width less those two sides. Its sections didn't clip sideways (the
-       * page did), so these don't either.
+       * The grid: portamento's 14-track row, with a 50rem body centred on
+       * the screen (the whole width on phones) and the gutters taking the
+       * rest. The first version capped each section at 60rem but sized its
+       * gutters from the screen, so past about 1,470px the body shrank as
+       * the screen grew and the section backgrounds stopped short of the
+       * edges; up to there this is the same. Sections don't clip sideways
+       * (the page does).
        */
       .section {
-        max-width: 60rem;
-        margin: 0 auto;
         overflow-x: visible;
       }
       .grid {
-        --pt-body-width: calc(100% - max(0px, 100vw - 50rem));
+        --pt-body-width: min(100%, 50rem);
         --pt-col-gap: min(2rem, 7vw);
         overflow-x: visible;
       }
@@ -162,6 +162,8 @@
       .essays__list { z-index: 10; }
         .essays__list__box { color: #fff; margin: 2rem 0; width: 100%; }
         .essays__list__title { font-size: 2rem; }
+        /* a lighter blue than the default, which barely shows on black */
+        .essays__list__box a, .essays__list__box a:visited { color: #7aa7ff; }
 
       /* songs */
       .section--songs { padding-bottom: 3rem; }
@@ -371,7 +373,7 @@
         <pt-layer class="ai__2" col-start="phone:6 phone:4" col-end="phone:13 phone:7" y-start="9rem" y-end="-9rem"><img src="img/ai__2.jpeg" alt="" /></pt-layer>
         <pt-layer class="ai__3" col-start="phone:4 phone:3" col-end="phone:11 phone:6" y-start="6rem" y-end="-6rem"><img src="img/ai__3.jpeg" alt="" /></pt-layer>
 
-        <pt-layer class="ai__gay" col-start="11" col-end="13"><p>also i'm sorry that i'm gay</p></pt-layer>
+        <pt-layer class="ai__gay" col-start="phone:7 phone:11" col-end="13"><p>also i'm sorry that i'm gay</p></pt-layer>
       </pt-row>
     </pt-group>
 
